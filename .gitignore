@@ -1,1 +1,6 @@
-/vendor
+/.env.local
+/.env.*.local
+
+/applications/*/*/var/
+
+/vendor/
