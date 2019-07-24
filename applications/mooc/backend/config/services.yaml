@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+
+  CodelyTv\Mooc\Backend\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+  CodelyTv\:
+    resource: '../../../../src'
