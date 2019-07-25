@@ -22,13 +22,18 @@
   },
   "autoload": {
     "psr-4": {
-      "CodelyTv\\Mooc\\Backend\\": "applications/mooc/backend/src",
-      "CodelyTv\\Mooc\\Frontend\\": "applications/mooc/frontend/src",
+      "CodelyTv\\Apps\\Mooc\\Backend\\": "apps/mooc/backend/src",
+      "CodelyTv\\Apps\\Mooc\\Frontend\\": "apps/mooc/frontend/src",
 
-      "CodelyTv\\Backoffice\\Backend\\": "applications/backoffice/backend/src",
-      "CodelyTv\\Backoffice\\Frontend\\": "applications/backoffice/frontend/src",
+      "CodelyTv\\Apps\\Backoffice\\Backend\\": "apps/backoffice/backend/src",
+      "CodelyTv\\Apps\\Backoffice\\Frontend\\": "apps/backoffice/frontend/src",
 
       "CodelyTv\\": ["src"]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CodelyTv\\Tests\\": ["tests/src"]
     }
   }
 }
