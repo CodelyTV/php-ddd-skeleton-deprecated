@@ -4,7 +4,9 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Shared\Infrastructure;
 
-final class RandomNumberGenerator
+use CodelyTv\Shared\Domain\RandomNumberGenerator;
+
+final class PhpRandomNumberGenerator implements RandomNumberGenerator
 {
     public function generate(): int
     {

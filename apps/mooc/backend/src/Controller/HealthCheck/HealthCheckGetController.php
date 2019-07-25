@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Apps\Mooc\Backend\Controller\HealthCheck;
 
-use CodelyTv\Shared\Infrastructure\RandomNumberGenerator;
+use CodelyTv\Shared\Domain\RandomNumberGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
