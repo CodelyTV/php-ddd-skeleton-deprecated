@@ -4,7 +4,7 @@
   "type": "project",
   "description": "DDD php Skeleton - Monorepository",
   "require": {
-    "php": "7.3.6",
+    "php": ">7.2",
 
     "ext-apcu": "*",
     "ext-json": "*",
