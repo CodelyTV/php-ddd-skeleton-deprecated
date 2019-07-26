@@ -3,7 +3,7 @@ mooc_backend:
     FriendsOfBehat\SymfonyExtension:
       kernel:
         class: CodelyTv\Apps\Mooc\Backend\MoocBackendKernel
-      bootstrap: apps/mooc/bootstrap.php
+      bootstrap: apps/bootstrap.php
     Behat\MinkExtension:
       sessions:
         symfony:
