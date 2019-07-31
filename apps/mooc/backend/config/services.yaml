@@ -8,5 +8,13 @@ services:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
 
+  CodelyTv\Apps\Mooc\Backend\Command\:
+    resource: '../src/Command'
+    tags: ['console.command']
+
   CodelyTv\:
     resource: '../../../../src'
+
+  CodelyTv\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
