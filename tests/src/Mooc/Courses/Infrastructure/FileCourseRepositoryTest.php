@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace CodelyTv\Tests\Mooc\Courses\Infrastructure;
 
 use CodelyTv\Mooc\Courses\Domain\Course;
+use CodelyTv\Mooc\Courses\Domain\CourseDuration;
 use CodelyTv\Mooc\Courses\Domain\CourseId;
+use CodelyTv\Mooc\Courses\Domain\CourseName;
 use CodelyTv\Mooc\Courses\Infrastructure\FileCourseRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +17,11 @@ final class FileCourseRepositoryTest extends TestCase
     public function it_should_save_a_course(): void
     {
         $repository = new FileCourseRepository();
-        $course     = new Course(new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'), 'name', 'duration');
+        $course     = new Course(
+            new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'),
+            new CourseName('name'),
+            new CourseDuration('duration')
+        );
 
         $repository->save($course);
     }
@@ -24,7 +30,11 @@ final class FileCourseRepositoryTest extends TestCase
     public function it_should_return_an_existing_course(): void
     {
         $repository = new FileCourseRepository();
-        $course     = new Course(new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'), 'name', 'duration');
+        $course     = new Course(
+            new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'),
+            new CourseName('name'),
+            new CourseDuration('duration')
+        );
 
         $repository->save($course);
 

@@ -7,7 +7,9 @@ namespace CodelyTv\Tests\Mooc\Courses\Application\Create;
 use CodelyTv\Mooc\Courses\Application\Create\CourseCreator;
 use CodelyTv\Mooc\Courses\Application\Create\CreateCourseRequest;
 use CodelyTv\Mooc\Courses\Domain\Course;
+use CodelyTv\Mooc\Courses\Domain\CourseDuration;
 use CodelyTv\Mooc\Courses\Domain\CourseId;
+use CodelyTv\Mooc\Courses\Domain\CourseName;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +23,11 @@ final class CourseCreatorTest extends TestCase
 
         $request = new CreateCourseRequest('decf33ca-81a7-419f-a07a-74f214e928e5', 'some-name', 'some-duration');
 
-        $course = new Course(new CourseId($request->id()), $request->name(), $request->duration());
+        $course = new Course(
+            new CourseId($request->id()),
+            new CourseName($request->name()),
+            new CourseDuration($request->duration())
+        );
 
         $repository->method('save')->with($course);
 
