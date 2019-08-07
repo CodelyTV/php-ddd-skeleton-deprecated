@@ -17,7 +17,10 @@
 
     "lambdish/phunctional": "^1.0",
 
-    "ramsey/uuid": "^3.8"
+    "ramsey/uuid": "^3.8",
+
+    "doctrine/dbal": "^2.9",
+    "doctrine/orm": "^2.6"
   },
   "require-dev": {
     "ext-xdebug": "*",
