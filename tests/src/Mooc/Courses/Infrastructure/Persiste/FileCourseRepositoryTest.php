@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Mooc\Courses\Infrastructure;
+namespace CodelyTv\Tests\Mooc\Courses\Infrastructure\Persistence;
 
 use CodelyTv\Tests\Mooc\Courses\Application\Domain\CourseIdMother;
 use CodelyTv\Tests\Mooc\Courses\Application\Domain\CourseMother;
