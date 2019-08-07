@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace CodelyTv\Tests\Mooc\Courses\Infrastructure;
 
 use CodelyTv\Mooc\Courses\Domain\Course;
+use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Infrastructure\FileCourseRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ final class FileCourseRepositoryTest extends TestCase
     public function it_should_save_a_course(): void
     {
         $repository = new FileCourseRepository();
-        $course     = new Course('id', 'name', 'duration');
+        $course     = new Course(new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'), 'name', 'duration');
 
         $repository->save($course);
     }
@@ -23,7 +24,7 @@ final class FileCourseRepositoryTest extends TestCase
     public function it_should_return_an_existing_course(): void
     {
         $repository = new FileCourseRepository();
-        $course     = new Course('id', 'name', 'duration');
+        $course     = new Course(new CourseId('decf33ca-81a7-419f-a07a-74f214e928e5'), 'name', 'duration');
 
         $repository->save($course);
 
@@ -35,6 +36,6 @@ final class FileCourseRepositoryTest extends TestCase
     {
         $repository = new FileCourseRepository();
 
-        $this->assertNull($repository->search('randomId'));
+        $this->assertNull($repository->search(new CourseId('65cc2174-30bf-4630-9392-f8084f088cc6')));
     }
 }
