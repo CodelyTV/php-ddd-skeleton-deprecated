@@ -20,5 +20,6 @@ mooc_backend:
     courses:
       paths: [ tests/apps/mooc/backend/features/courses ]
       contexts:
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\FeatureContext
         - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiRequestContext
         - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiResponseContext

@@ -6,10 +6,10 @@ namespace CodelyTv\Tests\Mooc\Courses;
 
 use CodelyTv\Mooc\Courses\Domain\Course;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
+use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
-abstract class CoursesModuleUnitTestCase extends TestCase
+abstract class CoursesModuleUnitTestCase extends UnitTestCase
 {
     private $repository;
 

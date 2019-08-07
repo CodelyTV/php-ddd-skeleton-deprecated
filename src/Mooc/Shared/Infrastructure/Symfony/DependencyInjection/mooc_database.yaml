@@ -11,5 +11,5 @@ services:
         password: '%env(MOOC_DATABASE_PASSWORD)%'
       - '%env(APP_ENV)%'
     tags:
-      - { name: codely.mooc.database }
+      - { name: codely.database_connection }
     public: true

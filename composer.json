@@ -12,6 +12,7 @@
     "ext-pdo": "*",
 
     "symfony/framework-bundle": "^4.3",
+    "symfony/messenger": "^4.3",
     "symfony/dotenv": "^4.3",
     "symfony/yaml": "^4.3",
 

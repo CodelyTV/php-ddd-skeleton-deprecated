@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Infrastructure\Doctrine;
 
 use CodelyTv\Shared\Infrastructure\Doctrine\Dbal\DbalCustomTypesRegistrar;
-use CodelyTv\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\MySqlSchemaManager;
