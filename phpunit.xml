@@ -22,6 +22,12 @@
         stopOnRisky="true"
         verbose="false">
 
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <server name="KERNEL_CLASS" value="CodelyTv\Apps\Mooc\Backend\MoocBackendKernel" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+    </php>
+
     <testsuites>
         <testsuite name="Contexts">
             <directory>./tests/src</directory>
