@@ -10,3 +10,13 @@ services:
     resource: '../../../../tests/src'
 
   CodelyTv\Shared\Domain\RandomNumberGenerator: '@CodelyTv\Tests\Shared\Infrastructure\ConstantRandomNumberGenerator'
+
+wouterj_eloquent:
+  driver:   mysql
+  host:     '%env(MOOC_DATABASE_HOST)%'
+  port:     '%env(MOOC_DATABASE_PORT)%'
+  database: '%env(MOOC_DATABASE_NAME)%'
+  username: '%env(MOOC_DATABASE_USER)%'
+  password: '%env(MOOC_DATABASE_PASSWORD)%'
+  prefix:   ~
+  eloquent: ~

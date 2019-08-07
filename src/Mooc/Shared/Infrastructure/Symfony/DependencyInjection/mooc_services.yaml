@@ -1,5 +1,4 @@
 services:
 
   # Courses
-  CodelyTv\Mooc\Courses\Domain\CourseRepository: '@CodelyTv\Mooc\Courses\Infrastructure\Persistence\MySqlCourseRepository'
-
+  CodelyTv\Mooc\Courses\Domain\CourseRepository: '@CodelyTv\Mooc\Courses\Infrastructure\Persistence\MySqlEloquentCourseRepository'

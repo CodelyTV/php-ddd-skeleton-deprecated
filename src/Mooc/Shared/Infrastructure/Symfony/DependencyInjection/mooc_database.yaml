@@ -12,3 +12,4 @@ services:
       - '%env(APP_ENV)%'
     tags:
       - { name: codely.mooc.database }
+    public: true
