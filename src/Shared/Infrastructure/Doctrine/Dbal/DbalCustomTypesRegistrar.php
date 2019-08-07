@@ -11,10 +11,10 @@ final class DbalCustomTypesRegistrar
 {
     private static $initialized = false;
 
-    public static function register(DoctrineCustomType ...$customTypes): void
+    public static function register(array $dbalCustomTypesClasses): void
     {
         if (!self::$initialized) {
-            each(self::registerType(), $customTypes);
+            each(self::registerType(), $dbalCustomTypesClasses);
 
             self::$initialized = true;
         }
@@ -22,8 +22,8 @@ final class DbalCustomTypesRegistrar
 
     private static function registerType(): callable
     {
-        return static function (DoctrineCustomType $customType): void {
-            Type::addType($customType::customTypeName(), get_class($customType));
+        return static function ($dbalCustomTypesClasses): void {
+            Type::addType($dbalCustomTypesClasses::customTypeName(), $dbalCustomTypesClasses);
         };
     }
 }

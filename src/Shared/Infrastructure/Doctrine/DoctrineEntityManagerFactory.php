@@ -28,13 +28,13 @@ final class DoctrineEntityManagerFactory
         array $contextPrefixes,
         bool $isDevMode,
         string $schemaFile,
-        DoctrineCustomType ...$customTypes
+        array $dbalCustomTypesClasses
     ): EntityManagerInterface {
         if ($isDevMode) {
             static::generateDatabaseIfNotExists($parameters, $schemaFile);
         }
 
-        DbalCustomTypesRegistrar::register(...$customTypes);
+        DbalCustomTypesRegistrar::register($dbalCustomTypesClasses);
 
         return EntityManager::create($parameters, self::createConfiguration($contextPrefixes, $isDevMode));
     }
