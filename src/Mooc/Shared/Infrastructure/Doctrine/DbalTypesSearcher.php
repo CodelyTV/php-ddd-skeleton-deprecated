@@ -11,7 +11,7 @@ use function Lambdish\Phunctional\reduce;
 
 final class DbalTypesSearcher
 {
-    private const MAPPINGS_PATH = 'Infrastructure/Persistence/Mappings';
+    private const MAPPINGS_PATH = 'Infrastructure/Persistence/Doctrine';
 
     public static function inPath(string $path, string $contextName): array
     {

@@ -10,7 +10,7 @@ use function Lambdish\Phunctional\reindex;
 
 final class DoctrinePrefixesSearcher
 {
-    private const MAPPINGS_PATH = 'Infrastructure/Persistence/Mappings';
+    private const MAPPINGS_PATH = 'Infrastructure/Persistence/Doctrine';
 
     public static function inPath(string $path, string $baseNamespace): array
     {

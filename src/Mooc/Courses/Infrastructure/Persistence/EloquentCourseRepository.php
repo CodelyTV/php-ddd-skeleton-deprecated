@@ -9,9 +9,9 @@ use CodelyTv\Mooc\Courses\Domain\CourseDuration;
 use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseName;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
-use CodelyTv\Mooc\Courses\Infrastructure\Persistence\EloquentModels\CourseEloquentModel;
+use CodelyTv\Mooc\Courses\Infrastructure\Persistence\Eloquent\CourseEloquentModel;
 
-final class MySqlEloquentCourseRepository implements CourseRepository
+final class EloquentCourseRepository implements CourseRepository
 {
     public function save(Course $course): void
     {

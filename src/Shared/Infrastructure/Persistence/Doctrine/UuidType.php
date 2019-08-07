@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Infrastructure\Persistence\Mappings;
+namespace CodelyTv\Shared\Infrastructure\Persistence\Doctrine;
 
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
 use CodelyTv\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;

@@ -9,7 +9,7 @@ use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
 use Doctrine\ORM\EntityManager;
 
-final class MySqlCourseRepository implements CourseRepository
+final class DoctrineCourseRepository implements CourseRepository
 {
     private $entityManager;
 
