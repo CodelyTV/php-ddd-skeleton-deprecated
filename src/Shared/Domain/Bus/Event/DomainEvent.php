@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Domain\Bus;
+namespace CodelyTv\Shared\Domain\Bus\Event;
 
 use CodelyTv\Shared\Domain\Utils;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
@@ -14,7 +14,7 @@ abstract class DomainEvent
     private $eventId;
     private $occurredOn;
 
-    public function __construct(string $aggregateId, string $eventId = null, string $occurredOn = null)
+    public function __construct(string $aggregateId, ?string $eventId, ?string $occurredOn)
     {
         $this->aggregateId = $aggregateId;
         $this->eventId     = $eventId ?: Uuid::random()->value();
@@ -23,7 +23,14 @@ abstract class DomainEvent
 
     abstract public static function eventName(): string;
 
-    abstract public function plainBody(): array;
+    abstract public function toPrimitives(): array;
+
+    abstract public static function fromPrimitives(
+        string $aggregateId,
+        array $body,
+        string $eventId,
+        string $occurredOn
+    ): self;
 
     public function aggregateId(): string
     {

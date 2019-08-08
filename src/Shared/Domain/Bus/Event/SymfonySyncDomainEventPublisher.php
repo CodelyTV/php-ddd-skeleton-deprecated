@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Domain\Bus;
+namespace CodelyTv\Shared\Domain\Bus\Event;
 
 use function Lambdish\Phunctional\each;
 

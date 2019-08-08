@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 
-use CodelyTv\Shared\Domain\Bus\DomainEvent;
-use CodelyTv\Shared\Domain\Bus\DomainEventPublisher;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
 use PHPUnit\Framework\MockObject\MockObject;
 
 abstract class UnitTestCase

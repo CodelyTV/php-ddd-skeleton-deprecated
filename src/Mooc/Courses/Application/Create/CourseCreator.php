@@ -9,7 +9,7 @@ use CodelyTv\Mooc\Courses\Domain\CourseDuration;
 use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseName;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
-use CodelyTv\Shared\Domain\Bus\DomainEventPublisher;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
 
 final class CourseCreator
 {

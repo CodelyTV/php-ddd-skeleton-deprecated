@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Shared\Infrastructure\Bus;
 
-use CodelyTv\Shared\Domain\Bus\DomainEventSubscriber;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use ReflectionClass;
 use ReflectionMethod;
 use function Lambdish\Phunctional\map;

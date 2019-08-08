@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Shared\Infrastructure\Bus\Event;
 
-use CodelyTv\Shared\Domain\Bus\DomainEvent;
-use CodelyTv\Shared\Domain\Bus\EventBus;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
+use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Infrastructure\Bus\CallableFirstParameterExtractor;
 use Symfony\Component\Messenger\Handler\HandlersLocator;
 use Symfony\Component\Messenger\MessageBus;

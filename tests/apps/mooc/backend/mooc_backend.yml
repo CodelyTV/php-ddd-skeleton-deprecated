@@ -14,12 +14,16 @@ mooc_backend:
     health_check:
       paths: [ tests/apps/mooc/backend/features/health_check ]
       contexts:
-        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiRequestContext
-        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiResponseContext
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiContext
 
     courses:
       paths: [ tests/apps/mooc/backend/features/courses ]
       contexts:
-        - CodelyTv\Tests\Shared\Infrastructure\Behat\FeatureContext
-        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiRequestContext
-        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiResponseContext
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApplicationFeatureContext
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiContext
+
+    courses_counter:
+      paths: [ tests/apps/mooc/backend/features/courses_counter ]
+      contexts:
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApplicationFeatureContext
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiContext

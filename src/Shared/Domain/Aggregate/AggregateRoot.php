@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Domain\Aggregate;
 
 
-use CodelyTv\Shared\Domain\Bus\DomainEvent;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 
 abstract class AggregateRoot
 {

@@ -8,17 +8,36 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Mink\Session;
 use Behat\MinkExtension\Context\RawMinkContext;
 use CodelyTv\Tests\Shared\Infrastructure\Mink\MinkHelper;
+use CodelyTv\Tests\Shared\Infrastructure\Mink\MinkSessionRequestHelper;
 use RuntimeException;
 
-final class ApiResponseContext extends RawMinkContext
+final class ApiContext extends RawMinkContext
 {
     private $sessionHelper;
     private $minkSession;
+    private $request;
 
     public function __construct(Session $minkSession)
     {
         $this->minkSession   = $minkSession;
         $this->sessionHelper = new MinkHelper($this->minkSession);
+        $this->request       = new MinkSessionRequestHelper(new MinkHelper($minkSession));
+    }
+
+    /**
+     * @Given I send a :method request to :url
+     */
+    public function iSendARequestTo($method, $url): void
+    {
+        $this->request->sendRequest($method, $this->locatePath($url));
+    }
+
+    /**
+     * @Given I send a :method request to :url with body:
+     */
+    public function iSendARequestToWithBody($method, $url, PyStringNode $body): void
+    {
+        $this->request->sendRequestWithPyStringNode($method, $this->locatePath($url), $body);
     }
 
     /**
