@@ -2,13 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Mooc\Courses\Application\Domain;
+namespace CodelyTv\Tests\Mooc\Courses\Domain;
 
 use CodelyTv\Mooc\Courses\Application\Create\CreateCourseRequest;
 use CodelyTv\Mooc\Courses\Domain\Course;
 use CodelyTv\Mooc\Courses\Domain\CourseDuration;
-use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseName;
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 
 final class CourseMother
 {

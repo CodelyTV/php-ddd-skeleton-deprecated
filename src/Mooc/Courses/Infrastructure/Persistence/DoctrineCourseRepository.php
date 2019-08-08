@@ -5,27 +5,19 @@ declare(strict_types = 1);
 namespace CodelyTv\Mooc\Courses\Infrastructure\Persistence;
 
 use CodelyTv\Mooc\Courses\Domain\Course;
-use CodelyTv\Mooc\Courses\Domain\CourseId;
 use CodelyTv\Mooc\Courses\Domain\CourseRepository;
-use Doctrine\ORM\EntityManager;
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
+use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
-final class DoctrineCourseRepository implements CourseRepository
+final class DoctrineCourseRepository extends DoctrineRepository implements CourseRepository
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function save(Course $course): void
     {
-        $this->entityManager->persist($course);
-        $this->entityManager->flush($course);
+        $this->persist($course);
     }
 
     public function search(CourseId $id): ?Course
     {
-        return $this->entityManager->getRepository(Course::class)->find($id);
+        return $this->repository(Course::class)->find($id);
     }
 }

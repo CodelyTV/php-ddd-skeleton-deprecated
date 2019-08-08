@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Mooc\Courses\Infrastructure\Persistence\Doctrine;
 
-use CodelyTv\Mooc\Courses\Domain\CourseId;
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 use CodelyTv\Shared\Infrastructure\Persistence\Doctrine\UuidType;
 
 final class CourseIdType extends UuidType

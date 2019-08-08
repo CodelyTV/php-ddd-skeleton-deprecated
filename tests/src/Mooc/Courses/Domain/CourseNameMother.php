@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Mooc\Courses\Application\Domain;
+namespace CodelyTv\Tests\Mooc\Courses\Domain;
 
 use CodelyTv\Mooc\Courses\Domain\CourseName;
 use CodelyTv\Tests\Shared\Domain\WordMother;

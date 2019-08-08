@@ -14,7 +14,7 @@ abstract class DomainEvent
     private $eventId;
     private $occurredOn;
 
-    public function __construct(string $aggregateId, ?string $eventId, ?string $occurredOn)
+    public function __construct(string $aggregateId, string $eventId = null, string $occurredOn = null)
     {
         $this->aggregateId = $aggregateId;
         $this->eventId     = $eventId ?: Uuid::random()->value();

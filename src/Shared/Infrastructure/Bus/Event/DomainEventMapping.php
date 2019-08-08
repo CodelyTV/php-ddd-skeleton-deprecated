@@ -15,7 +15,7 @@ final class DomainEventMapping
 
     public function __construct(iterable $mapping)
     {
-        $this->mapping = reduce($this->eventsExtractor(), $mapping);
+        $this->mapping = reduce($this->eventsExtractor(), $mapping, []);
     }
 
     public function for(string $name)
@@ -37,8 +37,8 @@ final class DomainEventMapping
 
     private function eventNameExtractor(): callable
     {
-        return static function (DomainEvent $event): string {
-            return $event::eventName();
+        return static function (string $eventClass): string {
+            return $eventClass::eventName();
         };
     }
 }

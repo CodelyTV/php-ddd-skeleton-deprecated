@@ -15,7 +15,7 @@ abstract class CoursesModuleUnitTestCase extends UnitTestCase
 
     protected function shouldSave(Course $course): void
     {
-        $this->repository()->method('save')->with($course);
+        $this->repository()->method('save')->withAnyParameters();
     }
 
     /** @return CourseRepository|MockObject */

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Mooc\Courses\Domain;
 
+use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
 
 final class Course extends AggregateRoot
