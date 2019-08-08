@@ -32,7 +32,7 @@ final class CoursesCounterMother
             $existingCounter->id(),
             CoursesCounterTotalMother::create($existingCounter->total()->value() + 1),
             $courseId,
-            ...array_values($existingCounter->existingCourses())
+            ...$existingCounter->existingCourses()
         );
     }
 
