@@ -7,7 +7,7 @@ namespace CodelyTv\Tests\Mooc\CoursesCounter;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounter;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterRepository;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\UnitTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
+use Mockery\MockInterface;
 
 abstract class CoursesCounterModuleUnitTestCase extends UnitTestCase
 {
@@ -15,17 +15,24 @@ abstract class CoursesCounterModuleUnitTestCase extends UnitTestCase
 
     protected function shouldSave(CoursesCounter $course): void
     {
-        $this->repository()->method('save')->withAnyParameters();
+        $this->repository()
+            ->shouldReceive('save')
+            ->once()
+            ->with($this->similarTo($course))
+            ->andReturnNull();
     }
 
     protected function shouldSearch(?CoursesCounter $counter): void
     {
-        $this->repository()->method('search')->willReturn($counter);
+        $this->repository()
+            ->shouldReceive('search')
+            ->once()
+            ->andReturn($counter);
     }
 
-    /** @return CoursesCounterRepository|MockObject */
-    protected function repository(): MockObject
+    /** @return CoursesCounterRepository|MockInterface */
+    protected function repository(): MockInterface
     {
-        return $this->repository = $this->repository ?: $this->createMock(CoursesCounterRepository::class);
+        return $this->repository = $this->repository ?: $this->mock(CoursesCounterRepository::class);
     }
 }
