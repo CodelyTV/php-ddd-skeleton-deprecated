@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Shared\Domain;
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use RuntimeException;
 
@@ -22,6 +23,16 @@ final class Utils
     public static function dateToString(DateTimeInterface $date): string
     {
         return $date->format(DateTimeInterface::ATOM);
+    }
+
+    public static function stringToDate(string $date): DateTimeImmutable
+    {
+        return new DateTimeImmutable($date);
+    }
+
+    public static function jsonEncode(array $values): string
+    {
+        return json_encode($values);
     }
 
     public static function jsonDecode(string $json): array

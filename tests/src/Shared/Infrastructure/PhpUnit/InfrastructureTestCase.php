@@ -15,11 +15,13 @@ abstract class InfrastructureTestCase extends KernelTestCase
         parent::setUp();
     }
 
+    /** @return mixed */
     protected function service($id)
     {
         return self::$container->get($id);
     }
 
+    /** @return mixed */
     protected function parameter($parameter)
     {
         return self::$container->getParameter($parameter);

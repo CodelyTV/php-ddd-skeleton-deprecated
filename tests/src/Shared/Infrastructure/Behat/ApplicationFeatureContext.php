@@ -8,7 +8,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventUnserializer;
-use CodelyTv\Shared\Domain\Bus\Event\SymfonySyncDomainEventPublisher;
+use CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher;
 use CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncEventBus;
 use CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseConnections;
 use function Lambdish\Phunctional\each;

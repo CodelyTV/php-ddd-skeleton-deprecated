@@ -6,5 +6,5 @@ namespace CodelyTv\Shared\Domain\Bus\Event;
 
 interface DomainEventPublisher
 {
-    public function publish(DomainEvent ...$domainEvents);
+    public function publish(DomainEvent ...$domainEvents): void;
 }

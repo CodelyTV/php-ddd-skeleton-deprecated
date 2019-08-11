@@ -2,11 +2,13 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Domain\Bus\Event;
+namespace CodelyTv\Shared\Infrastructure\Bus\Event;
 
+use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
+use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
 use function Lambdish\Phunctional\each;
 
-class SymfonySyncDomainEventPublisher implements DomainEventPublisher
+final class SymfonySyncDomainEventPublisher implements DomainEventPublisher
 {
     private $events = [];
     private $publishedEvents = [];
