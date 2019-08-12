@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 
+use CodelyTv\Tests\Mooc\Shared\Infrastructure\PhpUnit\MoocEnvironmentArranger;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 abstract class InfrastructureTestCase extends KernelTestCase
@@ -13,6 +15,11 @@ abstract class InfrastructureTestCase extends KernelTestCase
         self::bootKernel(['environment' => 'test']);
 
         parent::setUp();
+
+        // @todo This should be for the "Shared Infrastructure" connection
+        $arranger = new MoocEnvironmentArranger($this->service(EntityManager::class));
+
+        $arranger->arrange();
     }
 
     /** @return mixed */

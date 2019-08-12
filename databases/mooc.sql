@@ -14,6 +14,7 @@ CREATE TABLE `courses_counter` (
 
 CREATE TABLE `domain_events` (
   `id` CHAR(36) NOT NULL,
+  `aggregate_id` CHAR(36) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `body` JSON NOT NULL,
   `occurred_on` timestamp NOT NULL,
