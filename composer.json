@@ -6,6 +6,7 @@
   "require": {
     "php": ">7.2",
 
+    "ext-amqp": "*",
     "ext-apcu": "*",
     "ext-json": "*",
     "ext-zend-opcache": "*",
