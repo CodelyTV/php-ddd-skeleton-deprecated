@@ -10,7 +10,7 @@ use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventUnserializer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher;
 use CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncEventBus;
-use CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseConnections;
+use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 use function Lambdish\Phunctional\each;
 
 final class ApplicationFeatureContext implements Context

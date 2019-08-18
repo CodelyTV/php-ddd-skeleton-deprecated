@@ -2,8 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Shared\Infrastructure\Doctrine;
+namespace CodelyTv\Shared\Infrastructure\Doctrine;
 
+use CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseCleaner;
 use Doctrine\ORM\EntityManager;
 use function Lambdish\Phunctional\apply;
 use function Lambdish\Phunctional\each;

@@ -7,7 +7,7 @@ namespace CodelyTv\Apps\Mooc\Backend\Command;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DoctrineDomainEventsConsumer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
-use CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseConnections;
+use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

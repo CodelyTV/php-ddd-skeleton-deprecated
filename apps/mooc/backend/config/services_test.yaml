@@ -21,6 +21,4 @@ services:
 
   CodelyTv\Shared\Domain\RandomNumberGenerator: '@CodelyTv\Tests\Shared\Infrastructure\ConstantRandomNumberGenerator'
 
-  CodelyTv\Tests\Shared\Infrastructure\Doctrine\DatabaseConnections:
-    arguments: [!tagged codely.database_connection]
 

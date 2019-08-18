@@ -34,6 +34,9 @@ services:
   CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator:
     arguments: [!tagged codely.domain_event_subscriber]
 
+  CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections:
+    arguments: [!tagged codely.database_connection]
+
   CodelyTv\Shared\Infrastructure\Symfony\AddJsonBodyToRequestListener:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
