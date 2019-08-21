@@ -6,7 +6,7 @@ namespace CodelyTv\Shared\Infrastructure\RabbitMQ;
 
 use AMQPQueue;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping;
-use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection;
+use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection;
 use Exception;
 use Psr\Log\LoggerInterface;
 
@@ -16,7 +16,7 @@ final class RabbitMQDomainEventConsumer
     private $mapping;
     private $logger;
 
-    public function __construct(RabbitMQConnection $connection, DomainEventMapping $mapping, LoggerInterface $logger)
+    public function __construct(RabbitMqConnection $connection, DomainEventMapping $mapping, LoggerInterface $logger)
     {
         $this->connection = $connection;
         $this->mapping    = $mapping;

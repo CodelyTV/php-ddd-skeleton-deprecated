@@ -9,7 +9,7 @@ use AMQPConnection;
 use AMQPExchange;
 use AMQPQueue;
 
-final class RabbitMQConnection
+final class RabbitMqConnection
 {
     private $configuration;
     /** @var AMQPConnection */

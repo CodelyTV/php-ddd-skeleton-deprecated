@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event\RabbitMq;
 
-use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection;
+use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection;
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus;
 use CodelyTv\Tests\Mooc\Courses\Domain\CourseCreatedDomainEventMother;
 use CodelyTv\Tests\Mooc\CoursesCounter\Domain\CoursesCounterIncrementedDomainEventMother;
@@ -18,7 +18,7 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
     {
         parent::setUp();
 
-        $this->publisher = new RabbitMqEventBus($this->service(RabbitMQConnection::class), 'test_domain_events');
+        $this->publisher = new RabbitMqEventBus($this->service(RabbitMqConnection::class), 'test_domain_events');
     }
 
     /** @test */

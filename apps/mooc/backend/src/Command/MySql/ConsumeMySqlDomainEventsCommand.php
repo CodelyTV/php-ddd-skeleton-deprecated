@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Apps\Mooc\Backend\Command;
+namespace CodelyTv\Apps\Mooc\Backend\Command\MySql;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
@@ -16,7 +16,7 @@ use function Lambdish\Phunctional\pipe;
 
 final class ConsumeMySqlDomainEventsCommand extends Command
 {
-    protected static $defaultName = 'codelytv:consume-domain-events:mysql';
+    protected static $defaultName = 'codelytv:mysql:consume';
     private $consumer;
     private $subscriberLocator;
     private $connections;

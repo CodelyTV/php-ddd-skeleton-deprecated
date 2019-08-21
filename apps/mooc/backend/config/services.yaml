@@ -45,11 +45,11 @@ services:
 
   # -- APP DEFINITIONS --
   # RabbitMQ
-  CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection:
+  CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection:
     arguments:
       - host: '%env(RABBITMQ_HOST)%'
         port: '%env(RABBITMQ_PORT)%'
-        vhost: '%env(RABBITMQ_VHOST)%'
+        vhost: '%env(RABBITMQ_MOOC_VHOST)%'
         login: '%env(RABBITMQ_LOGIN)%'
         password: '%env(RABBITMQ_PASSWORD)%'
         read_timeout: 0.2
@@ -57,7 +57,13 @@ services:
         connect_timeout: 0.2
 
   CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus:
-    arguments: ['@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection', '%env(RABBITMQ_EXCHANGE)%']
+    arguments: ['@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection', '%env(RABBITMQ_EXCHANGE)%']
+
+  CodelyTv\Apps\Mooc\Backend\Command\RabbitMq\ConfigureRabbitMqCommand:
+    arguments:
+      - '@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConfigurer'
+      - '%env(RABBITMQ_EXCHANGE)%'
+      - !tagged codely.domain_event_subscriber
 
 
   # -- IMPLEMENTATIONS SELECTOR --

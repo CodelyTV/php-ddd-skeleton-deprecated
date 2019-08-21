@@ -14,7 +14,7 @@ final class RabbitMqEventBus implements EventBus
     private $connection;
     private $exchangeName;
 
-    public function __construct(RabbitMQConnection $connection, string $exchangeName)
+    public function __construct(RabbitMqConnection $connection, string $exchangeName)
     {
         $this->connection   = $connection;
         $this->exchangeName = $exchangeName;
