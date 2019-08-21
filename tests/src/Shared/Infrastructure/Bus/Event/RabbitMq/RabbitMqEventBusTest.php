@@ -15,9 +15,11 @@ use CodelyTv\Tests\Mooc\Courses\Domain\CourseCreatedDomainEventMother;
 use CodelyTv\Tests\Mooc\CoursesCounter\Domain\CoursesCounterIncrementedDomainEventMother;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\InfrastructureTestCase;
 use RuntimeException;
+use Throwable;
 
 final class RabbitMqEventBusTest extends InfrastructureTestCase
 {
+    private $connection;
     private $exchangeName;
     private $configurer;
     private $publisher;
@@ -29,21 +31,21 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
     {
         parent::setUp();
 
-        $connection = $this->service(RabbitMqConnection::class);
+        $this->connection = $this->service(RabbitMqConnection::class);
 
         $this->exchangeName            = 'test_domain_events';
-        $this->configurer              = new RabbitMqConfigurer($connection);
-        $this->publisher               = new RabbitMqEventBus($connection, $this->exchangeName);
+        $this->configurer              = new RabbitMqConfigurer($this->connection);
+        $this->publisher               = new RabbitMqEventBus($this->connection, $this->exchangeName);
         $this->consumer                = new RabbitMqDomainEventsConsumer(
-            $connection,
+            $this->connection,
             $this->service(DomainEventJsonDeserializer::class),
             $this->exchangeName,
-            1
+            $maxRetries = 1
         );
         $this->fakeSubscriber          = new TestAllWorksOnRabbitMqEventsPublished();
         $this->consumerHasBeenExecuted = false;
 
-        $connection->queue(RabbitMqQueueNameFormatter::format($this->fakeSubscriber))->delete();
+        $this->cleanEnvironment($this->connection);
     }
 
     /** @test */
@@ -91,8 +93,7 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
 
         $this->publisher->publish($domainEvent);
 
-        $this->expectException(RuntimeException::class);
-        $this->consumer->consume($this->failingConsumer(), RabbitMqQueueNameFormatter::format($this->fakeSubscriber));
+        $this->simulateErrorConsuming();
 
         sleep(1);
 
@@ -102,6 +103,24 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
         );
 
         $this->assertTrue($this->consumerHasBeenExecuted);
+    }
+
+    /** @test */
+    public function it_should_send_events_to_dead_letter_after_retry_failed_domain_events(): void
+    {
+        $domainEvent = CourseCreatedDomainEventMother::random();
+
+        $this->configurer->configure($this->exchangeName, $this->fakeSubscriber);
+
+        $this->publisher->publish($domainEvent);
+
+        $this->simulateErrorConsuming();
+
+        sleep(1);
+
+        $this->simulateErrorConsuming();
+
+        $this->assertDeadLetterContainsEvent(1);
     }
 
     private function assertConsumer(DomainEvent ...$expectedDomainEvents): callable
@@ -118,5 +137,37 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
         return static function (DomainEvent $domainEvent): void {
             throw new RuntimeException('To test');
         };
+    }
+
+    private function simulateErrorConsuming(): void
+    {
+        try {
+            $this->consumer->consume(
+                $this->failingConsumer(),
+                RabbitMqQueueNameFormatter::format($this->fakeSubscriber)
+            );
+        } catch (Throwable $error) {
+            $this->assertInstanceOf(RuntimeException::class, $error);
+        }
+    }
+
+    private function cleanEnvironment(RabbitMqConnection $connection): void
+    {
+        $connection->queue(RabbitMqQueueNameFormatter::format($this->fakeSubscriber))->delete();
+        $connection->queue(RabbitMqQueueNameFormatter::formatRetry($this->fakeSubscriber))->delete();
+        $connection->queue(RabbitMqQueueNameFormatter::formatDeadLetter($this->fakeSubscriber))->delete();
+    }
+
+    private function assertDeadLetterContainsEvent(int $expectedNumberOfEvents): void
+    {
+        $totalEventsInDeadLetter = 0;
+
+        while ($this->connection->queue(RabbitMqQueueNameFormatter::formatDeadLetter($this->fakeSubscriber))->get(
+            AMQP_AUTOACK
+        )) {
+            $totalEventsInDeadLetter++;
+        }
+
+        $this->assertSame($expectedNumberOfEvents, $totalEventsInDeadLetter);
     }
 }

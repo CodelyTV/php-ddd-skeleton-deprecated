@@ -66,7 +66,7 @@ final class RabbitMqConfigurer
 
             $queue->bind($exchangeName, $queueName);
             $retryQueue->bind($retryExchangeName, $queueName);
-            $deadLetterQueue->bind($deadLetterExchangeName, $deadLetterQueueName);
+            $deadLetterQueue->bind($deadLetterExchangeName, $queueName);
 
             foreach ($subscriber::subscribedTo() as $eventClass) {
                 $queue->bind($exchangeName, $eventClass::eventName());

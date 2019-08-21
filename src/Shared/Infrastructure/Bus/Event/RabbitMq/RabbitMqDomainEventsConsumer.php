@@ -60,28 +60,32 @@ final class RabbitMqDomainEventsConsumer
     private function handleConsumptionError(AMQPEnvelope $envelope, AMQPQueue $queue): void
     {
         $this->hasBeenRedeliveredTooMuch($envelope)
-            ? $this->sendToDeadLetter($envelope)
-            : $this->requeue($envelope, $queue);
+            ? $this->sendToDeadLetter($envelope, $queue)
+            : $this->sendToRetry($envelope, $queue);
 
         $queue->ack($envelope->getDeliveryTag());
     }
 
     private function hasBeenRedeliveredTooMuch(AMQPEnvelope $envelope): bool
     {
-        return get('redelivery_count', $envelope->getHeaders(), 0) > $this->maxRetries;
+        return get('redelivery_count', $envelope->getHeaders(), 0) >= $this->maxRetries;
     }
 
-    private function sendToDeadLetter(AMQPEnvelope $envelope): void
+    private function sendToDeadLetter(AMQPEnvelope $envelope, AMQPQueue $queue): void
     {
-        var_dump('TO DEAD LETTER');
-        die;
+        $this->sendMessageTo(RabbitMqExchangeNameFormatter::deadLetter($this->exchangeName), $envelope, $queue);
     }
 
-    private function requeue(AMQPEnvelope $envelope, AMQPQueue $queue): void
+    private function sendToRetry(AMQPEnvelope $envelope, AMQPQueue $queue): void
+    {
+        $this->sendMessageTo(RabbitMqExchangeNameFormatter::retry($this->exchangeName), $envelope, $queue);
+    }
+
+    private function sendMessageTo(string $exchangeName, AMQPEnvelope $envelope, AMQPQueue $queue): void
     {
         $headers = $envelope->getHeaders();
 
-        $this->connection->exchange(RabbitMqExchangeNameFormatter::retry($this->exchangeName))->publish(
+        $this->connection->exchange($exchangeName)->publish(
             $envelope->getBody(),
             $queue->getName(),
             AMQP_NOPARAM,
