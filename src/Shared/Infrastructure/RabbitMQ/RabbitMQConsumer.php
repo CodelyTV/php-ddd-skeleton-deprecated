@@ -6,7 +6,7 @@ namespace CodelyTv\Shared\Infrastructure\RabbitMQ;
 
 use AMQPEnvelope;
 use AMQPQueue;
-use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonUnserializer;
+use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -23,7 +23,7 @@ final class RabbitMQConsumer
     public function __construct(callable $consumer, DomainEventMapping $eventMapping, LoggerInterface $logger)
     {
         $this->logger   = $logger;
-        $this->consumer = pipe(new DomainEventJsonUnserializer($eventMapping), $consumer);
+        $this->consumer = pipe(new DomainEventJsonDeserializer($eventMapping), $consumer);
     }
 
     public function __invoke(AMQPEnvelope $envelope, AMQPQueue $queue)

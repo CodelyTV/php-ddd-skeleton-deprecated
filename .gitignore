@@ -1,4 +1,4 @@
-/.env.local
+/.env.test.local.rafa
 /.env.*.local
 
 /apps/*/*/var/

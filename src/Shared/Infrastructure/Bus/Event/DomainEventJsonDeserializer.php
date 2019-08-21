@@ -5,11 +5,10 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Infrastructure\Bus\Event;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Domain\Bus\Event\DomainEventUnserializer;
 use CodelyTv\Shared\Domain\Utils;
 use RuntimeException;
 
-final class DomainEventJsonUnserializer implements DomainEventUnserializer
+final class DomainEventJsonDeserializer
 {
     private $mapping;
 
@@ -18,7 +17,7 @@ final class DomainEventJsonUnserializer implements DomainEventUnserializer
         $this->mapping = $mapping;
     }
 
-    public function unserialize(string $domainEvent): DomainEvent
+    public function deserialize(string $domainEvent): DomainEvent
     {
         $eventData  = Utils::jsonDecode($domainEvent);
         $eventName  = $eventData['data']['type'];

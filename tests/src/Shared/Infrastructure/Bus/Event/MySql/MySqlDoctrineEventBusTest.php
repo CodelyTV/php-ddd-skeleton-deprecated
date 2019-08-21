@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event;
+namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event\MySql;
 
 use CodelyTv\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineEventBus;
 use CodelyTv\Tests\Mooc\Courses\Domain\CourseCreatedDomainEventMother;

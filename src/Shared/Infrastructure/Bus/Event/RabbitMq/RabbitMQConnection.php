@@ -2,21 +2,24 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Infrastructure\RabbitMQ;
+namespace CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq;
 
 use AMQPChannel;
 use AMQPConnection;
+use AMQPExchange;
 use AMQPQueue;
 
 final class RabbitMQConnection
 {
+    private $configuration;
     /** @var AMQPConnection */
     private static $connection;
     /** @var AMQPChannel */
     private static $channel;
+    /** @var AMQPExchange[] */
+    private static $exchanges = [];
     /** @var AMQPQueue[] */
     private static $queues = [];
-    private $configuration;
 
     public function __construct(array $configuration)
     {
@@ -33,6 +36,18 @@ final class RabbitMQConnection
         }
 
         return self::$queues[$name];
+    }
+
+    public function exchange(string $name): AMQPExchange
+    {
+        if (!array_key_exists($name, self::$exchanges)) {
+            $exchange = new AMQPExchange($this->channel());
+            $exchange->setName($name);
+
+            self::$exchanges[$name] = $exchange;
+        }
+
+        return self::$exchanges[$name];
     }
 
     private function channel(): AMQPChannel

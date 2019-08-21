@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event;
+namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event\MySql;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping;

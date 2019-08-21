@@ -6,7 +6,7 @@ namespace CodelyTv\Tests\Shared\Infrastructure\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use CodelyTv\Shared\Domain\Bus\Event\DomainEventUnserializer;
+use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
 use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 
@@ -20,7 +20,7 @@ final class ApplicationFeatureContext implements Context
     public function __construct(
         DatabaseConnections $connections,
         InMemorySymfonyEventBus $bus,
-        DomainEventUnserializer $unserializer
+        DomainEventJsonDeserializer $unserializer
     ) {
         $this->connections  = $connections;
         $this->bus          = $bus;
@@ -39,7 +39,7 @@ final class ApplicationFeatureContext implements Context
      */
     public function iSendAnEventToTheEventBus(PyStringNode $event)
     {
-        $domainEvent = $this->unserializer->unserialize($event->getRaw());
+        $domainEvent = $this->unserializer->deserialize($event->getRaw());
 
         $this->bus->publish($domainEvent);
     }

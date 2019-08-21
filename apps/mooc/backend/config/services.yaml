@@ -24,8 +24,8 @@ services:
   CodelyTv\:
     resource: '../../../../src'
 
-  # Dependencies
-  CodelyTv\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus:
+  # -- TAGGING --
+  CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
     arguments: [!tagged codely.domain_event_subscriber]
     lazy: true
 
@@ -42,5 +42,23 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  # Instance selector
-  CodelyTv\Shared\Domain\Bus\Event\EventBus: '@CodelyTv\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus'
+
+  # -- APP DEFINITIONS --
+  # RabbitMQ
+  CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection:
+    arguments:
+      - host: '%env(RABBITMQ_HOST)%'
+        port: '%env(RABBITMQ_PORT)%'
+        vhost: '%env(RABBITMQ_VHOST)%'
+        login: '%env(RABBITMQ_LOGIN)%'
+        password: '%env(RABBITMQ_PASSWORD)%'
+        read_timeout: 0.2
+        write_timeout: 0.2
+        connect_timeout: 0.2
+
+  CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus:
+    arguments: ['@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection', '%env(RABBITMQ_EXCHANGE)%']
+
+
+  # -- IMPLEMENTATIONS SELECTOR --
+  CodelyTv\Shared\Domain\Bus\Event\EventBus: '@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus'

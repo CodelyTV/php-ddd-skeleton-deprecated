@@ -6,6 +6,7 @@ namespace CodelyTv\Shared\Infrastructure\RabbitMQ;
 
 use AMQPQueue;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping;
+use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMQConnection;
 use Exception;
 use Psr\Log\LoggerInterface;
 

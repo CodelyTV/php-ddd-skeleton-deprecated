@@ -5,11 +5,10 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Infrastructure\Bus\Event;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Domain\Bus\Event\DomainEventSerializer;
 
-final class DomainEventJsonSerializer implements DomainEventSerializer
+final class DomainEventJsonSerializer
 {
-    public function serialize(DomainEvent $domainEvent): string
+    public static function serialize(DomainEvent $domainEvent): string
     {
         return json_encode(
             [
