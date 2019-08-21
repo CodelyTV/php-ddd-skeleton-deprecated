@@ -59,7 +59,10 @@ final class RabbitMqConnection
     private function connection(): AMQPConnection
     {
         self::$connection = self::$connection ?: new AMQPConnection($this->configuration);
-        self::$connection->isConnected() ?: self::$connection->pconnect();
+
+        if (!self::$connection->isConnected()) {
+            self::$connection->pconnect();
+        }
 
         return self::$connection;
     }
