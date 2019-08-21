@@ -1,4 +1,4 @@
-/.env.test.local
+/.env.local
 /.env.*.local
 
 /apps/*/*/var/

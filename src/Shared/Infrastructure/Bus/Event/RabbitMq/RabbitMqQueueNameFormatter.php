@@ -13,9 +13,30 @@ final class RabbitMqQueueNameFormatter
 {
     public static function format(DomainEventSubscriber $subscriber): string
     {
-        $subscriberClassPaths = explode('\\', get_class($subscriber));
+        $subscriberClassPaths = explode('\\', str_replace('CodelyTv', 'codelytv', get_class($subscriber)));
 
-        return implode('-', map(self::toSnakeCase(), $subscriberClassPaths));
+        $queueNameParts = [
+            $subscriberClassPaths[0],
+            $subscriberClassPaths[1],
+            $subscriberClassPaths[2],
+            last($subscriberClassPaths)
+        ];
+
+        return implode('.', map(self::toSnakeCase(), $queueNameParts));
+    }
+
+    public static function formatRetry(DomainEventSubscriber $subscriber): string
+    {
+        $queueName = self::format($subscriber);
+
+        return "retry.$queueName";
+    }
+
+    public static function formatDeadLetter(DomainEventSubscriber $subscriber): string
+    {
+        $queueName = self::format($subscriber);
+
+        return "dead_letter.$queueName";
     }
 
     public static function shortFormat(DomainEventSubscriber $subscriber): string
