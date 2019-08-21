@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace CodelyTv\Apps\Mooc\Backend\Command;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Infrastructure\Bus\Event\MySqlDoctrineDomainEventsConsumer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
+use CodelyTv\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineDomainEventsConsumer;
 use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

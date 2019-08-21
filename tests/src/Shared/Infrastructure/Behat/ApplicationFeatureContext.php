@@ -7,7 +7,7 @@ namespace CodelyTv\Tests\Shared\Infrastructure\Behat;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventUnserializer;
-use CodelyTv\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus;
+use CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
 use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 
 final class ApplicationFeatureContext implements Context

@@ -2,9 +2,10 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Shared\Infrastructure\Bus\Event;
+namespace CodelyTv\Shared\Infrastructure\Bus\Event\MySql;
 
 use CodelyTv\Shared\Domain\Utils;
+use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping;
 use DateTimeImmutable;
 use Doctrine\DBAL\FetchMode;
 use Doctrine\ORM\EntityManager;
