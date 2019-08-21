@@ -22,12 +22,8 @@ final class CourseCreator
         $this->bus        = $bus;
     }
 
-    public function __invoke(CreateCourseRequest $request)
+    public function __invoke(CourseId $id, CourseName $name, CourseDuration $duration)
     {
-        $id       = new CourseId($request->id());
-        $name     = new CourseName($request->name());
-        $duration = new CourseDuration($request->duration());
-
         $course = Course::create($id, $name, $duration);
 
         $this->repository->save($course);

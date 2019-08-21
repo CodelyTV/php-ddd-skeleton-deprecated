@@ -12,6 +12,9 @@ services:
     CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber:
       tags: ['codely.domain_event_subscriber']
 
+    CodelyTv\Shared\Domain\Bus\Command\CommandHandler:
+      tags: ['codely.command_handler']
+
   CodelyTv\Apps\Mooc\Backend\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
@@ -44,6 +47,10 @@ services:
 
 
   # -- APP DEFINITIONS --
+  # Command/Query Handlers
+  CodelyTv\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
+    arguments: [!tagged codely.command_handler]
+
   # RabbitMQ
   CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection:
     arguments:

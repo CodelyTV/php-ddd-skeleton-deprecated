@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 
+use CodelyTv\Shared\Domain\Bus\Command\Command;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\UuidGenerator;
@@ -55,6 +56,11 @@ abstract class UnitTestCase extends MockeryTestCase
     protected function notify(DomainEvent $event, callable $subscriber): void
     {
         $subscriber($event);
+    }
+
+    protected function dispatch(Command $command, callable $commandHandler): void
+    {
+        $commandHandler($command);
     }
 
     protected function isSimilar($expected, $actual): bool
