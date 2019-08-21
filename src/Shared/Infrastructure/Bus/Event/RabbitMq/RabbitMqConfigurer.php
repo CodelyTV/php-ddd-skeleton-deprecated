@@ -60,12 +60,12 @@ final class RabbitMqConfigurer
             $retryQueueName      = RabbitMqQueueNameFormatter::formatRetry($subscriber);
             $deadLetterQueueName = RabbitMqQueueNameFormatter::formatDeadLetter($subscriber);
 
-            $queue           = $this->declareQueue($queueName, $retryExchangeName, $retryQueueName);
+            $queue           = $this->declareQueue($queueName);
             $retryQueue      = $this->declareQueue($retryQueueName, $exchangeName, $queueName, 1000);
             $deadLetterQueue = $this->declareQueue($deadLetterQueueName);
 
             $queue->bind($exchangeName, $queueName);
-            $retryQueue->bind($retryExchangeName, $retryQueueName);
+            $retryQueue->bind($retryExchangeName, $queueName);
             $deadLetterQueue->bind($deadLetterExchangeName, $deadLetterQueueName);
 
             foreach ($subscriber::subscribedTo() as $eventClass) {

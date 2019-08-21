@@ -52,12 +52,19 @@ services:
         vhost: '%env(RABBITMQ_MOOC_VHOST)%'
         login: '%env(RABBITMQ_LOGIN)%'
         password: '%env(RABBITMQ_PASSWORD)%'
-        read_timeout: 0.2
-        write_timeout: 0.2
-        connect_timeout: 0.2
+        read_timeout: 2
+        write_timeout: 2
+        connect_timeout: 5
 
   CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus:
     arguments: ['@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection', '%env(RABBITMQ_EXCHANGE)%']
+
+  CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqDomainEventsConsumer:
+    arguments:
+      - '@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection'
+      - '@CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer'
+      - '%env(RABBITMQ_EXCHANGE)%'
+      - '%env(RABBITMQ_MAX_RETRIES)%'
 
   CodelyTv\Apps\Mooc\Backend\Command\RabbitMq\ConfigureRabbitMqCommand:
     arguments:

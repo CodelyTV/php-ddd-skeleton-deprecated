@@ -23,6 +23,7 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
     private $publisher;
     private $consumer;
     private $fakeSubscriber;
+    private $consumerHasBeenExecuted;
 
     protected function setUp(): void
     {
@@ -30,14 +31,17 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
 
         $connection = $this->service(RabbitMqConnection::class);
 
-        $this->exchangeName   = 'test_domain_events';
-        $this->configurer     = new RabbitMqConfigurer($connection);
-        $this->publisher      = new RabbitMqEventBus($connection, $this->exchangeName);
-        $this->consumer       = new RabbitMqDomainEventsConsumer(
+        $this->exchangeName            = 'test_domain_events';
+        $this->configurer              = new RabbitMqConfigurer($connection);
+        $this->publisher               = new RabbitMqEventBus($connection, $this->exchangeName);
+        $this->consumer                = new RabbitMqDomainEventsConsumer(
             $connection,
-            $this->service(DomainEventJsonDeserializer::class)
+            $this->service(DomainEventJsonDeserializer::class),
+            $this->exchangeName,
+            1
         );
-        $this->fakeSubscriber = new TestAllWorksOnRabbitMqEventsPublished();
+        $this->fakeSubscriber          = new TestAllWorksOnRabbitMqEventsPublished();
+        $this->consumerHasBeenExecuted = false;
 
         $connection->queue(RabbitMqQueueNameFormatter::format($this->fakeSubscriber))->delete();
     }
@@ -52,9 +56,11 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
         $this->publisher->publish($domainEvent);
 
         $this->consumer->consume(
-            $this->consumer($domainEvent),
+            $this->assertConsumer($domainEvent),
             RabbitMqQueueNameFormatter::format($this->fakeSubscriber)
         );
+
+        $this->assertTrue($this->consumerHasBeenExecuted);
     }
 
     /** @test */
@@ -69,15 +75,48 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
         $this->publisher->publish($domainEvent);
 
         $this->consumer->consume(
-            $this->consumer($domainEvent),
+            $this->assertConsumer($domainEvent),
             RabbitMqQueueNameFormatter::format($this->fakeSubscriber)
         );
+
+        $this->assertTrue($this->consumerHasBeenExecuted);
     }
 
-    private function consumer(DomainEvent ...$expectedDomainEvents): callable
+    /** @test */
+    public function it_should_retry_failed_domain_events(): void
+    {
+        $domainEvent = CourseCreatedDomainEventMother::random();
+
+        $this->configurer->configure($this->exchangeName, $this->fakeSubscriber);
+
+        $this->publisher->publish($domainEvent);
+
+        $this->expectException(RuntimeException::class);
+        $this->consumer->consume($this->failingConsumer(), RabbitMqQueueNameFormatter::format($this->fakeSubscriber));
+
+        sleep(1);
+
+        $this->consumer->consume(
+            $this->assertConsumer($domainEvent),
+            RabbitMqQueueNameFormatter::format($this->fakeSubscriber)
+        );
+
+        $this->assertTrue($this->consumerHasBeenExecuted);
+    }
+
+    private function assertConsumer(DomainEvent ...$expectedDomainEvents): callable
     {
         return function (DomainEvent $domainEvent) use ($expectedDomainEvents): void {
             $this->assertContainsEquals($domainEvent, $expectedDomainEvents);
+
+            $this->consumerHasBeenExecuted = true;
+        };
+    }
+
+    private function failingConsumer(): callable
+    {
+        return static function (DomainEvent $domainEvent): void {
+            throw new RuntimeException('To test');
         };
     }
 }
