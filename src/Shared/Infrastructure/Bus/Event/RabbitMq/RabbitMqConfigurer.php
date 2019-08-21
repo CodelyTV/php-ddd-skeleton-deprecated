@@ -5,9 +5,7 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber;
-use CodelyTv\Shared\Domain\Utils;
 use function Lambdish\Phunctional\each;
-use function Lambdish\Phunctional\map;
 
 final class RabbitMqConfigurer
 {
@@ -40,7 +38,7 @@ final class RabbitMqConfigurer
     private function queueDeclarator(string $exchangeName): callable
     {
         return function (DomainEventSubscriber $subscriber) use ($exchangeName) {
-            $queueName = $this->formatQueueName($subscriber);
+            $queueName = RabbitMqQueueNameFormatter::format($subscriber);
 
             $queue = $this->connection->queue($queueName);
             $queue->setFlags(AMQP_DURABLE);
@@ -49,20 +47,6 @@ final class RabbitMqConfigurer
             foreach ($subscriber::subscribedTo() as $eventClass) {
                 $queue->bind($exchangeName, $eventClass::eventName());
             }
-        };
-    }
-
-    private function formatQueueName(DomainEventSubscriber $subscriber): string
-    {
-        $subscriberClassPaths = explode('\\', get_class($subscriber));
-
-        return implode('-', map($this->toSnakeCase(), $subscriberClassPaths));
-    }
-
-    private function toSnakeCase(): callable
-    {
-        return static function (string $text) {
-            return Utils::toSnakeCase($text);
         };
     }
 }

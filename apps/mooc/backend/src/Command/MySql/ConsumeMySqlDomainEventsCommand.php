@@ -42,7 +42,6 @@ final class ConsumeMySqlDomainEventsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var int $quantityEventsToProcess */
         $quantityEventsToProcess = (int) $input->getArgument('quantity');
 
         $consumer = pipe($this->consumer(), $this->clearConnections());
@@ -53,7 +52,7 @@ final class ConsumeMySqlDomainEventsCommand extends Command
     private function consumer(): callable
     {
         return static function (DomainEvent $domainEvent) {
-            $subscribers = $this->subscriberLocator->for(get_class($domainEvent));
+            $subscribers = $this->subscriberLocator->allSubscribedTo(get_class($domainEvent));
 
             foreach ($subscribers as $subscriber) {
                 $subscriber($domainEvent);
