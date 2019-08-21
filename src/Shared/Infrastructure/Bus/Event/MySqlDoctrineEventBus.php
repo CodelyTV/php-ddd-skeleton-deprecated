@@ -5,12 +5,12 @@ declare(strict_types = 1);
 namespace CodelyTv\Shared\Infrastructure\Bus\Event;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
+use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\Utils;
 use Doctrine\ORM\EntityManager;
 use function Lambdish\Phunctional\each;
 
-final class DoctrineDomainEventPublisher implements DomainEventPublisher
+final class MySqlDoctrineEventBus implements EventBus
 {
     private const DATABASE_TIMESTAMP_FORMAT = 'Y-m-d H:i:s';
     private $entityManager;

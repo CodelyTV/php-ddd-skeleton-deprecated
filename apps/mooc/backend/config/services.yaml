@@ -25,8 +25,9 @@ services:
     resource: '../../../../src'
 
   # Dependencies
-  CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncEventBus:
+  CodelyTv\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus:
     arguments: [!tagged codely.domain_event_subscriber]
+    lazy: true
 
   CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventMapping:
     arguments: [!tagged codely.domain_event_subscriber]
@@ -42,4 +43,4 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
   # Instance selector
-  CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher: '@CodelyTv\Shared\Infrastructure\Bus\Event\SymfonySyncDomainEventPublisher'
+  CodelyTv\Shared\Domain\Bus\Event\EventBus: '@CodelyTv\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus'

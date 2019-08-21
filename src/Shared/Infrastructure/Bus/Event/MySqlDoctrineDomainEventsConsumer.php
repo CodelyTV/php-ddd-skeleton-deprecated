@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManager;
 use function Lambdish\Phunctional\each;
 use function Lambdish\Phunctional\map;
 
-final class DoctrineDomainEventsConsumer
+final class MySqlDoctrineDomainEventsConsumer
 {
     private $entityManager;
     private $eventMapping;

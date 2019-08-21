@@ -17,7 +17,7 @@ final class CourseCreatorTest extends CoursesModuleUnitTestCase
     {
         parent::setUp();
 
-        $this->creator = new CourseCreator($this->repository(), $this->domainEventPublisher());
+        $this->creator = new CourseCreator($this->repository(), $this->eventBus());
     }
 
     /** @test */

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace CodelyTv\Apps\Mooc\Backend\Command;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
-use CodelyTv\Shared\Infrastructure\Bus\Event\DoctrineDomainEventsConsumer;
+use CodelyTv\Shared\Infrastructure\Bus\Event\MySqlDoctrineDomainEventsConsumer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
 use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 use Symfony\Component\Console\Command\Command;
@@ -22,7 +22,7 @@ final class ConsumeMySqlDomainEventsCommand extends Command
     private $connections;
 
     public function __construct(
-        DoctrineDomainEventsConsumer $consumer,
+        MySqlDoctrineDomainEventsConsumer $consumer,
         DatabaseConnections $connections,
         DomainEventSubscriberLocator $subscriberLocator
     ) {

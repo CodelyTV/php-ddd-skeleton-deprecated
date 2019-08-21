@@ -8,23 +8,23 @@ use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounter;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterId;
 use CodelyTv\Mooc\CoursesCounter\Domain\CoursesCounterRepository;
 use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
-use CodelyTv\Shared\Domain\Bus\Event\DomainEventPublisher;
+use CodelyTv\Shared\Domain\Bus\Event\EventBus;
 use CodelyTv\Shared\Domain\UuidGenerator;
 
 final class CoursesCounterIncrementer
 {
     private $repository;
     private $uuidGenerator;
-    private $publisher;
+    private $bus;
 
     public function __construct(
         CoursesCounterRepository $repository,
         UuidGenerator $uuidGenerator,
-        DomainEventPublisher $publisher
+        EventBus $bus
     ) {
         $this->repository    = $repository;
         $this->uuidGenerator = $uuidGenerator;
-        $this->publisher     = $publisher;
+        $this->bus           = $bus;
     }
 
     public function __invoke(CourseId $courseId)
@@ -35,7 +35,7 @@ final class CoursesCounterIncrementer
             $counter->increment($courseId);
 
             $this->repository->save($counter);
-            $this->publisher->publish(...$counter->pullDomainEvents());
+            $this->bus->publish(...$counter->pullDomainEvents());
         }
     }
 

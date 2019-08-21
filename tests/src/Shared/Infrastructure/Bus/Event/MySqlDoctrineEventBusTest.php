@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event;
 
-use CodelyTv\Shared\Infrastructure\Bus\Event\DoctrineDomainEventPublisher;
+use CodelyTv\Shared\Infrastructure\Bus\Event\MySqlDoctrineEventBus;
 use CodelyTv\Tests\Mooc\Courses\Domain\CourseCreatedDomainEventMother;
 use CodelyTv\Tests\Mooc\CoursesCounter\Domain\CoursesCounterIncrementedDomainEventMother;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\InfrastructureTestCase;
 use Doctrine\ORM\EntityManager;
 
-final class DoctrineDomainEventPublisherTest extends InfrastructureTestCase
+final class MySqlDoctrineEventBusTest extends InfrastructureTestCase
 {
     private $publisher;
 
@@ -18,7 +18,7 @@ final class DoctrineDomainEventPublisherTest extends InfrastructureTestCase
     {
         parent::setUp();
 
-        $this->publisher = new DoctrineDomainEventPublisher($this->service(EntityManager::class));
+        $this->publisher = new MySqlDoctrineEventBus($this->service(EntityManager::class));
     }
 
     /** @test */

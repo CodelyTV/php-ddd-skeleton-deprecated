@@ -24,7 +24,7 @@ final class IncrementCoursesCounterOnCourseCreatedTest extends CoursesCounterMod
             new CoursesCounterIncrementer(
                 $this->repository(),
                 $this->uuidGenerator(),
-                $this->domainEventPublisher()
+                $this->eventBus()
             )
         );
     }
