@@ -13,11 +13,11 @@ use function Lambdish\Phunctional\each;
 final class MySqlDoctrineEventBus implements EventBus
 {
     private const DATABASE_TIMESTAMP_FORMAT = 'Y-m-d H:i:s';
-    private $entityManager;
+    private $connection;
 
     public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager = $entityManager;
+        $this->connection = $entityManager->getConnection();
     }
 
     public function publish(DomainEvent ...$domainEvents): void
@@ -27,21 +27,20 @@ final class MySqlDoctrineEventBus implements EventBus
 
     private function publisher(): callable
     {
-        $connection = $this->entityManager->getConnection();
-
-        return static function (DomainEvent $domainEvent) use ($connection): void {
-            $id          = $connection->quote($domainEvent->eventId());
-            $aggregateId = $connection->quote($domainEvent->aggregateId());
-            $name        = $connection->quote($domainEvent::eventName());
-            $body        = $connection->quote(Utils::jsonEncode($domainEvent->toPrimitives()));
-            $occurredOn  = $connection->quote(
+        return function (DomainEvent $domainEvent): void {
+            $id          = $this->connection->quote($domainEvent->eventId());
+            $aggregateId = $this->connection->quote($domainEvent->aggregateId());
+            $name        = $this->connection->quote($domainEvent::eventName());
+            $body        = $this->connection->quote(Utils::jsonEncode($domainEvent->toPrimitives()));
+            $occurredOn  = $this->connection->quote(
                 Utils::stringToDate($domainEvent->occurredOn())->format(self::DATABASE_TIMESTAMP_FORMAT)
             );
 
-            $connection->executeUpdate(
+            $this->connection->executeUpdate(
                 <<<SQL
-INSERT INTO domain_events (id, aggregate_id, name, body, occurred_on) VALUES ($id, $aggregateId, $name, $body, $occurredOn);
-SQL
+                INSERT INTO domain_events (id,  aggregate_id, name,  body,  occurred_on) 
+                                   VALUES ($id, $aggregateId, $name, $body, $occurredOn);
+                SQL
             );
         };
     }
