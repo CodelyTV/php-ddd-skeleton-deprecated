@@ -13,18 +13,17 @@ use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
 final class ApplicationFeatureContext implements Context
 {
     private $connections;
-    private $publisher;
     private $bus;
-    private $unserializer;
+    private $deserializer;
 
     public function __construct(
         DatabaseConnections $connections,
         InMemorySymfonyEventBus $bus,
-        DomainEventJsonDeserializer $unserializer
+        DomainEventJsonDeserializer $deserializer
     ) {
         $this->connections  = $connections;
         $this->bus          = $bus;
-        $this->unserializer = $unserializer;
+        $this->deserializer = $deserializer;
     }
 
     /** @BeforeScenario */
@@ -39,7 +38,7 @@ final class ApplicationFeatureContext implements Context
      */
     public function iSendAnEventToTheEventBus(PyStringNode $event)
     {
-        $domainEvent = $this->unserializer->deserialize($event->getRaw());
+        $domainEvent = $this->deserializer->deserialize($event->getRaw());
 
         $this->bus->publish($domainEvent);
     }

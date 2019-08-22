@@ -7,6 +7,8 @@ namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 use CodelyTv\Shared\Domain\Bus\Command\Command;
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Domain\Bus\Event\EventBus;
+use CodelyTv\Shared\Domain\Bus\Query\Query;
+use CodelyTv\Shared\Domain\Bus\Query\Response;
 use CodelyTv\Shared\Domain\UuidGenerator;
 use CodelyTv\Tests\Shared\Domain\TestUtils;
 use Mockery;
@@ -61,6 +63,20 @@ abstract class UnitTestCase extends MockeryTestCase
     protected function dispatch(Command $command, callable $commandHandler): void
     {
         $commandHandler($command);
+    }
+
+    protected function assertAskResponse(Response $expected, Query $query, callable $queryHandler): void
+    {
+        $actual = $queryHandler($query);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    protected function assertAskThrowsException(string $expectedErrorClass, Query $query, callable $queryHandler): void
+    {
+        $this->expectException($expectedErrorClass);
+
+        $queryHandler($query);
     }
 
     protected function isSimilar($expected, $actual): bool

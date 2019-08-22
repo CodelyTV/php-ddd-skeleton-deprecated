@@ -15,6 +15,9 @@ services:
     CodelyTv\Shared\Domain\Bus\Command\CommandHandler:
       tags: ['codely.command_handler']
 
+    CodelyTv\Shared\Domain\Bus\Query\QueryHandler:
+      tags: ['codely.query_handler']
+
   CodelyTv\Apps\Mooc\Backend\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
@@ -50,6 +53,9 @@ services:
   # Command/Query Handlers
   CodelyTv\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
     arguments: [!tagged codely.command_handler]
+
+  CodelyTv\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
+    arguments: [!tagged codely.query_handler]
 
   # RabbitMQ
   CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection:
