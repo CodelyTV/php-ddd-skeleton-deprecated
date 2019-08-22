@@ -6,7 +6,7 @@ namespace CodelyTv\Mooc\CoursesCounter\Domain;
 
 use CodelyTv\Mooc\Shared\Domain\Course\CourseId;
 use CodelyTv\Shared\Domain\Aggregate\AggregateRoot;
-use function Lambdish\Phunctional\reindex;
+use function Lambdish\Phunctional\search;
 
 final class CoursesCounter extends AggregateRoot
 {
@@ -51,15 +51,15 @@ final class CoursesCounter extends AggregateRoot
 
     public function hasIncremented(CourseId $courseId): bool
     {
-        $indexedCourses = reindex($this->valueExtractor(), $this->existingCourses());
+        $existingCourse = search($this->courseIdComparator($courseId), $this->existingCourses());
 
-        return isset($indexedCourses[$courseId->value()]);
+        return null !== $existingCourse;
     }
 
-    private function valueExtractor(): callable
+    private function courseIdComparator(CourseId $courseId): callable
     {
-        return static function (CourseId $id) {
-            return $id->value();
+        return static function (CourseId $other) use ($courseId) {
+            return $courseId->equals($other);
         };
     }
 }

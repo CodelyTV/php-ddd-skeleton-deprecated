@@ -35,6 +35,11 @@ class Uuid
         }
     }
 
+    public function equals(Uuid $other): bool
+    {
+        return $this->value() === $other->value();
+    }
+
     public function __toString()
     {
         return $this->value();
