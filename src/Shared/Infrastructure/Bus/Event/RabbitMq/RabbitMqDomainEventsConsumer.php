@@ -36,7 +36,7 @@ final class RabbitMqDomainEventsConsumer
         try {
             $this->connection->queue($queueName)->consume($this->consumer($subscriber));
         } catch (AMQPQueueException $error) {
-            // We don't want to raise an error it there are no messages on the queue
+            // We don't want to raise an error if there are no messages in the queue
         }
     }
 

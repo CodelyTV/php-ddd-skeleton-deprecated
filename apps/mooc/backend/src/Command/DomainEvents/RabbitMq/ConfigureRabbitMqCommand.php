@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Apps\Mooc\Backend\Command\RabbitMq;
+namespace CodelyTv\Apps\Mooc\Backend\Command\DomainEvents\RabbitMq;
 
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConfigurer;
 use Symfony\Component\Console\Command\Command;
@@ -12,7 +12,7 @@ use Traversable;
 
 final class ConfigureRabbitMqCommand extends Command
 {
-    protected static $defaultName = 'codelytv:rabbitmq:configure';
+    protected static $defaultName = 'codelytv:domain-events:rabbitmq:configure';
     private $configurer;
     private $exchangeName;
     private $subscribers;

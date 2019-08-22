@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Apps\Mooc\Backend\Command\RabbitMq;
+namespace CodelyTv\Apps\Mooc\Backend\Command\DomainEvents\RabbitMq;
 
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqDomainEventsConsumer;
@@ -15,7 +15,7 @@ use function Lambdish\Phunctional\repeat;
 
 final class ConsumeRabbitMqDomainEventsCommand extends Command
 {
-    protected static $defaultName = 'codelytv:rabbitmq:consume';
+    protected static $defaultName = 'codelytv:domain-events:rabbitmq:consume';
     private $consumer;
     private $connections;
     private $locator;

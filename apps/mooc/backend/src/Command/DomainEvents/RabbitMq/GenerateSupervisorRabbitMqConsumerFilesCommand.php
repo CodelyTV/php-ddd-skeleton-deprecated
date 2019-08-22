@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace CodelyTv\Apps\Mooc\Backend\Command\RabbitMq;
+namespace CodelyTv\Apps\Mooc\Backend\Command\DomainEvents\RabbitMq;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator;
@@ -15,7 +15,7 @@ use function Lambdish\Phunctional\each;
 
 final class GenerateSupervisorRabbitMqConsumerFilesCommand extends Command
 {
-    protected static $defaultName = 'codelytv:rabbitmq:generate-supervisor-files';
+    protected static $defaultName = 'codelytv:domain-events:rabbitmq:generate-supervisor-files';
 
     private const EVENTS_TO_PROCESS_AT_TIME           = 200;
     private const NUMBERS_OF_PROCESSES_PER_SUBSCRIBER = 1;
@@ -75,7 +75,7 @@ final class GenerateSupervisorRabbitMqConsumerFilesCommand extends Command
     {
         return <<<EOF
 [program:codelytv_{queue_name}]
-command      = {path}/apps/mooc/backend/bin/console codelytv:rabbitmq:consume --env=prod {queue_name} {events_to_process}
+command      = {path}/apps/mooc/backend/bin/console codelytv:domain-events:rabbitmq:consume --env=prod {queue_name} {events_to_process}
 process_name = %(program_name)s_%(process_num)02d
 numprocs     = {processes}
 startsecs    = 1

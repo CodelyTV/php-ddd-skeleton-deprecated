@@ -33,7 +33,9 @@ final class MySqlDoctrineDomainEventsConsumer
 
         $ids = implode(', ', map($this->idExtractor(), $events));
 
-        $this->connection->executeUpdate("DELETE FROM domain_events WHERE id IN ($ids)");
+        if (!empty($ids)) {
+            $this->connection->executeUpdate("DELETE FROM domain_events WHERE id IN ($ids)");
+        }
     }
 
     private function executeSubscribers(callable $subscribers): callable
