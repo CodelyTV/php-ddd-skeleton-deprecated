@@ -15,15 +15,15 @@ use Doctrine\ORM\EntityManager;
 
 final class MySqlDoctrineEventBusTest extends InfrastructureTestCase
 {
-    private $publisher;
+    private $bus;
     private $consumer;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->publisher = new MySqlDoctrineEventBus($this->service(EntityManager::class));
-        $this->consumer  = new MySqlDoctrineDomainEventsConsumer(
+        $this->bus      = new MySqlDoctrineEventBus($this->service(EntityManager::class));
+        $this->consumer = new MySqlDoctrineDomainEventsConsumer(
             $this->service(EntityManager::class),
             $this->service(DomainEventMapping::class)
         );
@@ -35,12 +35,15 @@ final class MySqlDoctrineEventBusTest extends InfrastructureTestCase
         $domainEvent        = CourseCreatedDomainEventMother::random();
         $anotherDomainEvent = CoursesCounterIncrementedDomainEventMother::random();
 
-        $this->publisher->publish($domainEvent, $anotherDomainEvent);
+        $this->bus->publish($domainEvent, $anotherDomainEvent);
 
-        $this->consumer->consume($this->consumer($domainEvent, $anotherDomainEvent), 2);
+        $this->consumer->consume(
+            $this->spySubscriber($domainEvent, $anotherDomainEvent),
+            $eventsToConsume = 2
+        );
     }
 
-    private function consumer(DomainEvent ...$expectedDomainEvents): callable
+    private function spySubscriber(DomainEvent ...$expectedDomainEvents): callable
     {
         return function (DomainEvent $domainEvent) use ($expectedDomainEvents): void {
             $this->assertContainsEquals($domainEvent, $expectedDomainEvents);

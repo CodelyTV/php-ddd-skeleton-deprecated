@@ -23,10 +23,10 @@ final class MySqlDoctrineDomainEventsConsumer
         $this->eventMapping = $eventMapping;
     }
 
-    public function consume(callable $subscribers, int $totalEvents): void
+    public function consume(callable $subscribers, int $eventsToConsume): void
     {
         $events = $this->connection
-            ->executeQuery("SELECT * FROM domain_events ORDER BY occurred_on ASC LIMIT $totalEvents")
+            ->executeQuery("SELECT * FROM domain_events ORDER BY occurred_on ASC LIMIT $eventsToConsume")
             ->fetchAll(FetchMode::ASSOCIATIVE);
 
         each($this->executeSubscribers($subscribers), $events);
