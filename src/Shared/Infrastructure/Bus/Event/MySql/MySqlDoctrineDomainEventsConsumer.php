@@ -14,32 +14,31 @@ use function Lambdish\Phunctional\map;
 
 final class MySqlDoctrineDomainEventsConsumer
 {
-    private $entityManager;
+    private $connection;
     private $eventMapping;
 
     public function __construct(EntityManager $entityManager, DomainEventMapping $eventMapping)
     {
-        $this->entityManager = $entityManager;
-        $this->eventMapping  = $eventMapping;
+        $this->connection   = $entityManager->getConnection();
+        $this->eventMapping = $eventMapping;
     }
 
-    public function consume(callable $subscriber, int $totalEvents): void
+    public function consume(callable $subscribers, int $totalEvents): void
     {
-        $connection = $this->entityManager->getConnection();
-
-        $events = $connection->executeQuery("SELECT * FROM domain_events ORDER BY occurred_on ASC LIMIT $totalEvents")
+        $events = $this->connection
+            ->executeQuery("SELECT * FROM domain_events ORDER BY occurred_on ASC LIMIT $totalEvents")
             ->fetchAll(FetchMode::ASSOCIATIVE);
 
-        each($this->executeSubscriber($subscriber), $events);
+        each($this->executeSubscribers($subscribers), $events);
 
         $ids = implode(', ', map($this->idExtractor(), $events));
 
-        $connection->executeUpdate("DELETE FROM domain_events WHERE id IN ($ids)");
+        $this->connection->executeUpdate("DELETE FROM domain_events WHERE id IN ($ids)");
     }
 
-    private function executeSubscriber(callable $subscriber): callable
+    private function executeSubscribers(callable $subscribers): callable
     {
-        return function (array $rawEvent) use ($subscriber) {
+        return function (array $rawEvent) use ($subscribers): void {
             try {
                 $domainEventClass = $this->eventMapping->for($rawEvent['name']);
                 $domainEvent      = $domainEventClass::fromPrimitives(
@@ -49,7 +48,7 @@ final class MySqlDoctrineDomainEventsConsumer
                     $this->formatDate($rawEvent['occurred_on'])
                 );
 
-                $subscriber($domainEvent);
+                $subscribers($domainEvent);
             } catch (\RuntimeException $error) {
             }
         };
@@ -62,7 +61,7 @@ final class MySqlDoctrineDomainEventsConsumer
 
     private function idExtractor(): callable
     {
-        return static function (array $event) {
+        return static function (array $event): string {
             return "'${event['id']}'";
         };
     }
