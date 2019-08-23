@@ -19,7 +19,7 @@ final class GenerateSupervisorRabbitMqConsumerFilesCommand extends Command
 
     private const EVENTS_TO_PROCESS_AT_TIME           = 200;
     private const NUMBERS_OF_PROCESSES_PER_SUBSCRIBER = 1;
-    private const SUPERVISOR_PATH                     = __DIR__ . '/../../../build/supervisor';
+    private const SUPERVISOR_PATH                     = __DIR__ . '/../../../../build/supervisor';
     private $locator;
 
     public function __construct(DomainEventSubscriberLocator $locator)
