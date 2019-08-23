@@ -51,7 +51,7 @@ final class ConsumeMySqlDomainEventsCommand extends Command
 
     private function consumer(): callable
     {
-        return static function (DomainEvent $domainEvent) {
+        return function (DomainEvent $domainEvent) {
             $subscribers = $this->subscriberLocator->allSubscribedTo(get_class($domainEvent));
 
             foreach ($subscribers as $subscriber) {

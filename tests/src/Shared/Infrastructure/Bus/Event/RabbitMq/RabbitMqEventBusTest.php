@@ -6,6 +6,7 @@ namespace CodelyTv\Tests\Shared\Infrastructure\Bus\Event\RabbitMq;
 
 use CodelyTv\Shared\Domain\Bus\Event\DomainEvent;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer;
+use CodelyTv\Shared\Infrastructure\Bus\Event\MySql\MySqlDoctrineEventBus;
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConfigurer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection;
 use CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqDomainEventsConsumer;
@@ -35,7 +36,11 @@ final class RabbitMqEventBusTest extends InfrastructureTestCase
 
         $this->exchangeName            = 'test_domain_events';
         $this->configurer              = new RabbitMqConfigurer($this->connection);
-        $this->publisher               = new RabbitMqEventBus($this->connection, $this->exchangeName);
+        $this->publisher               = new RabbitMqEventBus(
+            $this->connection,
+            $this->exchangeName,
+            $this->service(MySqlDoctrineEventBus::class)
+        );
         $this->consumer                = new RabbitMqDomainEventsConsumer(
             $this->connection,
             $this->service(DomainEventJsonDeserializer::class),
