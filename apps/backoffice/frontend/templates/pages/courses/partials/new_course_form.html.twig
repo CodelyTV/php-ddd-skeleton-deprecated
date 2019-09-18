@@ -5,8 +5,13 @@
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Identificador
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-first-name" type="text" placeholder="En formado UUID" value="1fd9336b-14c7-4f6a-a290-3ded86a10278">
+            <input class="{% if flash.has('errors.id') %}border border-red-500{% endif %} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-first-name" type="text" name="id" placeholder="En formado UUID"
+                   value="{{ flash.get('inputs.id', new_course_id) }}">
+
+            {% if flash.has('errors.id') %}
+                <p class="text-red-500 text-xs italic">{{ flash.get('errors.id') }}</p>
+            {% endif %}
         </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
@@ -14,15 +19,24 @@
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Nombre
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-first-name" type="text" placeholder="DDD en PHP">
+            <input class="{% if flash.has('errors.name') %}border border-red-500{% endif %} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-first-name" type="text" name="name" placeholder="DDD en PHP"
+                   value="{{ flash.get('inputs.name') }}">
+
+            {% if flash.has('errors.name') %}
+                <p class="text-red-500 text-xs italic">{{ flash.get('errors.name') }}</p>
+            {% endif %}
         </div>
         <div class="w-full md:w-1/2 px-3">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                 Duración (en inglés)
             </label>
-            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                   id="grid-last-name" type="text" placeholder="8 days">
+            <input class="{% if flash.has('errors.duration') %}border border-red-500{% endif %} appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                   id="grid-last-name" type="text" name="duration" placeholder="8 days"
+                   value="{{ flash.get('inputs.duration') }}">
+            {% if flash.has('errors.duration') %}
+                <p class="text-red-500 text-xs italic">{{ flash.get('errors.duration') }}</p>
+            {% endif %}
         </div>
     </div>
     <div class="flex flex-wrap mb-6">
