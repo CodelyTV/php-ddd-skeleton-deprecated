@@ -45,4 +45,8 @@ rebuild:
 	make start
 
 start-local:
-	php -S localhost:8030 apps/mooc/backend/public/index.php
+	php -S localhost:8030 apps/mooc/backend/public/index.php &
+	php -S localhost:8032 apps/backoffice/frontend/public/index.php &
+
+stop-local:
+	killall php

@@ -40,7 +40,7 @@ final class MySqlDoctrineEventBus implements EventBus
                 <<<SQL
                 INSERT INTO domain_events (id,  aggregate_id, name,  body,  occurred_on) 
                                    VALUES ($id, $aggregateId, $name, $body, $occurredOn);
-                SQL
+SQL
             );
         };
     }
