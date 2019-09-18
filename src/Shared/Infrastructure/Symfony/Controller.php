@@ -49,6 +49,13 @@ abstract class Controller
         return new RedirectResponse($this->router->generate($routeName), 302);
     }
 
+    public function redirectWithMessage(string $routeName, string $message): RedirectResponse
+    {
+        $this->addFlashFor('message', [$message]);
+
+        return $this->redirect($routeName);
+    }
+
     public function redirectWithErrors(
         string $routeName,
         ConstraintViolationListInterface $errors,

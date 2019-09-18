@@ -48,6 +48,9 @@ final class CoursesPostController extends Controller
             )
         );
 
-        return $this->redirect('courses_get');
+        return $this->redirectWithMessage(
+            'courses_get',
+            sprintf('Feliciades, el curso %s ha sido creado!', $request->request->get('name'))
+        );
     }
 }
