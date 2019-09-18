@@ -72,3 +72,7 @@ services:
 
   # -- IMPLEMENTATIONS SELECTOR --
   CodelyTv\Shared\Domain\Bus\Event\EventBus: '@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus'
+
+twig:
+  default_path: '%kernel.project_dir%/templates'
+  strict_variables: true

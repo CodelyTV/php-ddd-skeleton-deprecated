@@ -6,6 +6,7 @@
 
 ## Starting the server
 * Local using: `make start-local`
+  * First you should execute `make prepare-local`
 * Docker using: `make build`
 
 And then going to `http://localhost:8030/health-check` to check all is ok.

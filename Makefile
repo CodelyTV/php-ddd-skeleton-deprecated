@@ -44,9 +44,13 @@ rebuild:
 	make deps
 	make start
 
+prepare-local:
+	curl -sS https://get.symfony.com/cli/installer | bash
+
 start-local:
-	php -S localhost:8030 apps/mooc/backend/public/index.php &
-	php -S localhost:8032 apps/backoffice/frontend/public/index.php &
+	symfony serve --dir=apps/mooc/backend/public --port=8030 -d
+	symfony serve --dir=apps/backoffice/frontend/public --port=8032 -d
 
 stop-local:
-	killall php
+	symfony server:stop --dir=apps/mooc/backend/public
+	symfony server:stop --dir=apps/backoffice/frontend/public
