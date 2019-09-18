@@ -18,7 +18,7 @@ final class CoursesGetController extends Controller
         $coursesCounterResponse = $this->ask(new FindCoursesCounterQuery());
 
         return $this->render(
-            'pages/courses.html.twig',
+            'pages/courses/courses.html.twig',
             [
                 'title'           => 'Courses',
                 'description'     => 'Courses CodelyTV - Backoffice',
