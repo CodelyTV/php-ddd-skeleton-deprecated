@@ -15,8 +15,9 @@ final class CoursesGetController extends Controller
         return $this->render(
             'pages/courses.html.twig',
             [
-                'title'       => 'Courses',
-                'description' => 'Courses CodelyTV - Backoffice',
+                'title'           => 'Courses',
+                'description'     => 'Courses CodelyTV - Backoffice',
+                'courses_counter' => 5,
             ]
         );
     }
