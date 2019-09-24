@@ -15,7 +15,11 @@ final class MoocEntityManagerFactory
     {
         $isDevMode = 'prod' !== $environment;
 
-        $prefixes               = DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'CodelyTv\Mooc');
+        $prefixes = array_merge(
+            DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'CodelyTv\Mooc'),
+            DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Backoffice', 'CodelyTv\Backoffice')
+        );
+
         $dbalCustomTypesClasses = DbalTypesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'Mooc');
 
         return DoctrineEntityManagerFactory::create(

@@ -48,8 +48,8 @@ prepare-local:
 	curl -sS https://get.symfony.com/cli/installer | bash
 
 start-local:
-	symfony serve --dir=apps/mooc/backend/public --port=8030 -d
-	symfony serve --dir=apps/backoffice/frontend/public --port=8032 -d
+	symfony serve --dir=apps/mooc/backend/public --port=8030 -d --no-tls
+	symfony serve --dir=apps/backoffice/frontend/public --port=8032 -d --no-tls
 
 stop-local:
 	symfony server:stop --dir=apps/mooc/backend/public
