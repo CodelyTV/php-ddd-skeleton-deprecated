@@ -6,7 +6,7 @@ namespace CodelyTv\Apps\Backoffice\Frontend\Controller\Courses;
 
 use CodelyTv\Backoffice\Courses\Application\BackofficeCourseResponse;
 use CodelyTv\Backoffice\Courses\Application\BackofficeCoursesResponse;
-use CodelyTv\Backoffice\Courses\Application\SearchAll\SearchAllBackofficeCoursesQuery;
+use CodelyTv\Backoffice\Courses\Application\SearchByCriteria\SearchBackofficeCoursesByCriteriaQuery;
 use CodelyTv\Shared\Infrastructure\Symfony\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,15 @@ final class ApiCoursesGetController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         /** @var BackofficeCoursesResponse $response */
-        $response = $this->ask(new SearchAllBackofficeCoursesQuery());
+        $response = $this->ask(
+            new SearchBackofficeCoursesByCriteriaQuery(
+                $request->query->get('filters', []),
+                $request->query->get('order_by'),
+                $request->query->get('order'),
+                $request->query->get('limit'),
+                $request->query->get('offset')
+            )
+        );
 
         return new JsonResponse(map($this->toArray(), $response->courses()));
     }
