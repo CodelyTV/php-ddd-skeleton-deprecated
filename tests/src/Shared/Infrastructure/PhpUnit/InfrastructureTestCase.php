@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit;
 
 use CodelyTv\Tests\Mooc\Shared\Infrastructure\PhpUnit\MoocEnvironmentArranger;
+use CodelyTv\Tests\Shared\Domain\TestUtils;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -20,6 +21,11 @@ abstract class InfrastructureTestCase extends KernelTestCase
         $arranger = new MoocEnvironmentArranger($this->service(EntityManager::class));
 
         $arranger->arrange();
+    }
+
+    protected function assertSimilar($expected, $actual): void
+    {
+        TestUtils::assertSimilar($expected, $actual);
     }
 
     /** @return mixed */

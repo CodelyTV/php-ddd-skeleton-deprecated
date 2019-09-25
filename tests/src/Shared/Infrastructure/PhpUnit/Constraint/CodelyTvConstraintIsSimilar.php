@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Tests\Shared\Infrastructure\PhpUnit\Constraint;
 
+use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\Comparator\AggregateRootArraySimilarComparator;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\Comparator\AggregateRootSimilarComparator;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\Comparator\DateTimeSimilarComparator;
 use CodelyTv\Tests\Shared\Infrastructure\PhpUnit\Comparator\DateTimeStringSimilarComparator;
@@ -38,6 +39,7 @@ final class CodelyTvConstraintIsSimilar extends Constraint
         $isValid           = true;
         $comparatorFactory = new Factory();
 
+        $comparatorFactory->register(new AggregateRootArraySimilarComparator());
         $comparatorFactory->register(new AggregateRootSimilarComparator());
         $comparatorFactory->register(new DomainEventArraySimilarComparator());
         $comparatorFactory->register(new DomainEventSimilarComparator());

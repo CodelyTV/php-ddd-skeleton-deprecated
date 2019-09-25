@@ -40,7 +40,7 @@ final class Order
         return $this->orderType()->isNone();
     }
 
-    private static function none(): Order
+    public static function none(): Order
     {
         return new Order(new OrderBy(''), OrderType::none());
     }

@@ -27,7 +27,6 @@ final class BackofficeCoursesByCriteriaSearcher
         $criteria = new Criteria($filters, $order, $offset, $limit);
 
         return new BackofficeCoursesResponse(...map($this->toResponse(), $this->repository->matching($criteria)));
-
     }
 
     private function toResponse(): callable
