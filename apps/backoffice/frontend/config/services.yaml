@@ -69,9 +69,18 @@ services:
   CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus:
     arguments: ['@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConnection', '%env(RABBITMQ_EXCHANGE)%']
 
+  CodelyTv\Shared\Infrastructure\Elasticsearch\ElasticsearchClient:
+    factory: '@CodelyTv\Shared\Infrastructure\Elasticsearch\ElasticsearchClientFactory'
+    arguments:
+      - '%env(BACKOFFICE_ELASTICSEARCH_HOST)%'
+      - '%env(BACKOFFICE_ELASTICSEARCH_INDEX_PREFIX)%'
+      - '%kernel.project_dir%/../../../databases/backoffice'
+      - '%env(APP_ENV)%'
+    public: true
 
   # -- IMPLEMENTATIONS SELECTOR --
   CodelyTv\Shared\Domain\Bus\Event\EventBus: '@CodelyTv\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqEventBus'
+  CodelyTv\Backoffice\Courses\Domain\BackofficeCourseRepository: '@CodelyTv\Backoffice\Courses\Infrastructure\Persistence\ElasticsearchBackofficeCourseRepository'
 
 twig:
   default_path: '%kernel.project_dir%/templates'

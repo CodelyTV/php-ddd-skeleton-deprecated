@@ -1,0 +1,17 @@
+{
+  "mappings": {
+    "courses": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "name": {
+          "type": "text"
+        },
+        "duration": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}

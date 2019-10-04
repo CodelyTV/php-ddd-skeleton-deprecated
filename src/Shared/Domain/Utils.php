@@ -7,6 +7,7 @@ namespace CodelyTv\Shared\Domain;
 use DateTimeImmutable;
 use DateTimeInterface;
 use RuntimeException;
+use function Lambdish\Phunctional\filter;
 
 final class Utils
 {
@@ -67,5 +68,25 @@ final class Utils
             }
         }
         return $results;
+    }
+
+    public static function directoriesIn(string $path): array
+    {
+        return filter(
+            static function (string $possibleModule) {
+                return !in_array($possibleModule, ['.', '..']);
+            },
+            scandir($path)
+        );
+    }
+
+    public static function filesIn(string $path, $fileType): array
+    {
+        return filter(
+            static function (string $possibleModule) use ($fileType) {
+                return strstr($possibleModule, $fileType);
+            },
+            scandir($path)
+        );
     }
 }

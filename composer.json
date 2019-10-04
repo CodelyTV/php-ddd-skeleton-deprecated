@@ -25,7 +25,9 @@
 
     "doctrine/dbal": "^2.9",
     "doctrine/orm": "^2.6",
-    "ocramius/proxy-manager": "2.2.2"
+    "ocramius/proxy-manager": "2.2.2",
+
+    "elasticsearch/elasticsearch": "^7.3"
   },
   "require-dev": {
     "ext-xdebug": "*",

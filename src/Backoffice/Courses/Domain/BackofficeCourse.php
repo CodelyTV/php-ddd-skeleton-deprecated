@@ -19,6 +19,20 @@ final class BackofficeCourse extends AggregateRoot
         $this->duration = $duration;
     }
 
+    public function toPrimitives(): array
+    {
+        return [
+            'id'       => $this->id,
+            'name'     => $this->name,
+            'duration' => $this->duration,
+        ];
+    }
+
+    public static function fromPrimitives(array $primitives): BackofficeCourse
+    {
+        return new self($primitives['id'], $primitives['name'], $primitives['duration']);
+    }
+
     public function id(): string
     {
         return $this->id;

@@ -13,3 +13,4 @@ services:
     tags:
       - { name: codely.database_connection }
     public: true
+
