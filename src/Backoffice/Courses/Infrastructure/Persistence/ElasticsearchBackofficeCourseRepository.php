@@ -14,7 +14,7 @@ final class ElasticsearchBackofficeCourseRepository extends ElasticsearchReposit
 {
     protected function aggregateName(): string
     {
-        return 'course';
+        return 'courses';
     }
 
     public function save(BackofficeCourse $course): void
@@ -29,7 +29,7 @@ final class ElasticsearchBackofficeCourseRepository extends ElasticsearchReposit
 
     public function matching(Criteria $criteria): array
     {
-        return map($this->toCourse(), $this->searchAllInElastic());
+        return map($this->toCourse(), $this->searchByCriteria($criteria));
     }
 
     private function toCourse()

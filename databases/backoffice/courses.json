@@ -3,13 +3,16 @@
     "courses": {
       "properties": {
         "id": {
-          "type": "keyword"
+          "type": "keyword",
+          "index": true
         },
         "name": {
-          "type": "text"
+          "type": "text",
+          "index": true
         },
         "duration": {
-          "type": "text"
+          "type": "text",
+          "index": true
         }
       }
     }
