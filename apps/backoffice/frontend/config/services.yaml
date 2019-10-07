@@ -1,5 +1,5 @@
 imports:
-  - { resource: ../../../../src/Mooc/Shared/Infrastructure/Symfony/DependencyInjection/mooc_database.yaml }
+  - { resource: ../../../../src/Backoffice/Shared/Infrastructure/Symfony/DependencyInjection/backoffice_services.yaml }
   - { resource: ../../../../src/Mooc/Shared/Infrastructure/Symfony/DependencyInjection/mooc_services.yaml }
 
 services:
@@ -24,8 +24,14 @@ services:
 
 
   # Wire
-  CodelyTv\:
-    resource: '../../../../src'
+  CodelyTv\Shared\:
+    resource: '../../../../src/Shared'
+
+  CodelyTv\Backoffice\:
+    resource: '../../../../src/Backoffice'
+
+  CodelyTv\Mooc\:
+    resource: '../../../../src/Mooc'
 
   # -- TAGGING --
   CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:

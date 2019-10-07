@@ -1,5 +1,4 @@
 imports:
-  - { resource: ../../../../src/Mooc/Shared/Infrastructure/Symfony/DependencyInjection/mooc_database.yaml }
   - { resource: ../../../../src/Mooc/Shared/Infrastructure/Symfony/DependencyInjection/mooc_services.yaml }
 
 services:
@@ -27,8 +26,11 @@ services:
     tags: ['console.command']
 
   # Wire
-  CodelyTv\:
-    resource: '../../../../src'
+  CodelyTv\Shared\:
+    resource: '../../../../src/Shared'
+
+  CodelyTv\Mooc\:
+    resource: '../../../../src/Mooc'
 
   # -- TAGGING --
   CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
