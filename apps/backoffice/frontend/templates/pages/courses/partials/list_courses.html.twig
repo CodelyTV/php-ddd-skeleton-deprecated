@@ -137,12 +137,12 @@
         const urlParts = inputs.map(input => input.name + "=" + input.value);
 
 
-        const url = "{{ path('api_courses_get') }}?" + urlParts.join("&");
+        const url = "http://localhost:8034/courses?" + urlParts.join("&");
 
         addCoursesList(url);
     }
 </script>
 
 <script>
-    addCoursesList("{{ path('api_courses_get') }}");
+    addCoursesList("http://localhost:8034/courses");
 </script>
