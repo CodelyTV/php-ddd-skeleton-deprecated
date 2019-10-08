@@ -44,4 +44,9 @@ final class Order
     {
         return new Order(new OrderBy(''), OrderType::none());
     }
+
+    public function serialize(): string
+    {
+        return sprintf('%s.%s', $this->orderBy->value(), $this->orderType->value());
+    }
 }
