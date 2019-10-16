@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Twig\Environment;
 
-abstract class Controller
+abstract class WebController
 {
     private $twig;
     private $router;

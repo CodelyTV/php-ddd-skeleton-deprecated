@@ -5,14 +5,14 @@ declare(strict_types = 1);
 namespace CodelyTv\Apps\Backoffice\Frontend\Controller\Courses;
 
 use CodelyTv\Mooc\Courses\Application\Create\CreateCourseCommand;
-use CodelyTv\Shared\Infrastructure\Symfony\Controller;
+use CodelyTv\Shared\Infrastructure\Symfony\WebController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
-final class CoursesPostController extends Controller
+final class CoursesPostWebController extends WebController
 {
     public function __invoke(Request $request)
     {

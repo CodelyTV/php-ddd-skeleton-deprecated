@@ -7,11 +7,11 @@ namespace CodelyTv\Apps\Backoffice\Frontend\Controller\Courses;
 use CodelyTv\Mooc\CoursesCounter\Application\Find\CoursesCounterResponse;
 use CodelyTv\Mooc\CoursesCounter\Application\Find\FindCoursesCounterQuery;
 use CodelyTv\Shared\Domain\ValueObject\Uuid;
-use CodelyTv\Shared\Infrastructure\Symfony\Controller;
+use CodelyTv\Shared\Infrastructure\Symfony\WebController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class CoursesGetController extends Controller
+final class CoursesGetWebController extends WebController
 {
     public function __invoke(Request $request): Response
     {
