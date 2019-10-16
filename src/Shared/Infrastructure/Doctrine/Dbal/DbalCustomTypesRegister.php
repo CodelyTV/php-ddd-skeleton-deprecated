@@ -7,7 +7,7 @@ namespace CodelyTv\Shared\Infrastructure\Doctrine\Dbal;
 use Doctrine\DBAL\Types\Type;
 use function Lambdish\Phunctional\each;
 
-final class DbalCustomTypesRegistrar
+final class DbalCustomTypesRegister
 {
     private static $initialized = false;
 

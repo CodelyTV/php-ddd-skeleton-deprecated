@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace CodelyTv\Shared\Infrastructure\Doctrine;
 
-use CodelyTv\Shared\Infrastructure\Doctrine\Dbal\DbalCustomTypesRegistrar;
+use CodelyTv\Shared\Infrastructure\Doctrine\Dbal\DbalCustomTypesRegister;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\MySqlSchemaManager;
@@ -33,7 +33,7 @@ final class DoctrineEntityManagerFactory
             static::generateDatabaseIfNotExists($parameters, $schemaFile);
         }
 
-        DbalCustomTypesRegistrar::register($dbalCustomTypesClasses);
+        DbalCustomTypesRegister::register($dbalCustomTypesClasses);
 
         return EntityManager::create($parameters, self::createConfiguration($contextPrefixes, $isDevMode));
     }
