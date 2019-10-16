@@ -7,6 +7,7 @@ namespace CodelyTv\Shared\Infrastructure\Bus\Command;
 use CodelyTv\Shared\Domain\Bus\Command\Command;
 use CodelyTv\Shared\Domain\Bus\Command\CommandBus;
 use CodelyTv\Shared\Infrastructure\Bus\CallableFirstParameterExtractor;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
 use Symfony\Component\Messenger\Handler\HandlersLocator;
 use Symfony\Component\Messenger\MessageBus;
@@ -33,6 +34,8 @@ final class InMemorySymfonyCommandBus implements CommandBus
             $this->bus->dispatch($command);
         } catch (NoHandlerForMessageException $unused) {
             throw new CommandNotRegisteredError($command);
+        } catch (HandlerFailedException $error) {
+            throw $error->getPrevious();
         }
     }
 }
