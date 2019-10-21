@@ -27,7 +27,8 @@
     "doctrine/orm": "^2.6",
     "ocramius/proxy-manager": "2.2.2",
 
-    "elasticsearch/elasticsearch": "^7.3"
+    "elasticsearch/elasticsearch": "^7.3",
+    "monolog/monolog": "^2.0"
   },
   "require-dev": {
     "ext-xdebug": "*",
