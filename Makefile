@@ -10,7 +10,7 @@ deps: composer-install
 composer-install: CMD=install
 composer-update: CMD=update
 composer composer-install composer-update:
-	@docker run --rm --interactive --tty --volume $(current-dir):/app --user $(id -u):$(id -g) \
+	@docker run --rm --interactive --volume $(current-dir):/app --user $(id -u):$(id -g) \
 		clevyr/prestissimo $(CMD) \
 			--ignore-platform-reqs \
 			--no-ansi \
@@ -21,11 +21,10 @@ reload:
 	@docker-compose exec nginx nginx -s reload
 
 test:
-	@docker exec -it codelytv-cqrs_ddd_php_example-php make run-tests
+	@docker exec codelytv-php_ddd_skeleton-php make run-tests
 
 run-tests:
 	mkdir -p build/test_results/phpunit
-	./vendor/bin/phpstan analyse -l 7 -c etc/phpstan/phpstan.neon applications/mooc_backend/src
 	./vendor/bin/phpunit --exclude-group='disabled' --log-junit build/test_results/phpunit/junit.xml tests
 	./vendor/bin/behat -p mooc_backend --format=progress -v
 
