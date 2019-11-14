@@ -10,7 +10,7 @@ deps: composer-install
 composer-install: CMD=install
 composer-update: CMD=update
 composer composer-install composer-update:
-	@docker run --rm --interactive --tty --volume $(current-dir):/app --user $(id -u):$(id -g) \
+	docker run --rm --interactive --tty --volume $(current-dir):/app --user $(id -u):$(id -g) \
 		clevyr/prestissimo $(CMD) \
 			--ignore-platform-reqs \
 			--no-ansi \
@@ -37,7 +37,7 @@ destroy: CMD=down
 # Usage: `make doco CMD="ps --services"`
 # Usage: `make doco CMD="build --parallel --pull --force-rm --no-cache"`
 doco start stop destroy:
-	@docker-compose $(CMD)
+	docker-compose $(CMD)
 
 rebuild:
 	docker-compose build --pull --force-rm --no-cache
