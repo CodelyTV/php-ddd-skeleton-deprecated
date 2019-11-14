@@ -16,6 +16,9 @@ jobs:
     - name: Start all the environment
       run: make start
 
+    - name: Debug
+      run: docker ps
+
     - name: Wait for the environment to get up
       env:
         MY_VAR: Hi there! My name is
