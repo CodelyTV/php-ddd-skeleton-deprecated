@@ -16,5 +16,17 @@ jobs:
     - name: Start all the environment
       run: make start
 
+    - name: Wait for the environment to get up
+      env:
+        MY_VAR: Hi there! My name is
+        FIRST_NAME: Mona
+        MIDDLE_NAME: The
+        LAST_NAME: Octocat
+      run: |
+        while ! docker exec codelytv-php_ddd_skeleton-mooc-mysql mysqladmin --user=root --password= --host "127.0.0.1" ping --silent &> /dev/null ; do
+            echo "Waiting for database connection..."
+            sleep 2
+        done
+
     - name: Run the tests
       run: make test
