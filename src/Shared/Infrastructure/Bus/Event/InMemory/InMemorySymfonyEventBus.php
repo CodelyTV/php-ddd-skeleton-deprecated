@@ -31,10 +31,10 @@ class InMemorySymfonyEventBus implements EventBus
 
     public function publish(DomainEvent ...$events): void
     {
-        try {
-            foreach ($events as $event) {
+        foreach ($events as $event) {
+            try {
                 $this->bus->dispatch($event);
-            }
-        } catch (NoHandlerForMessageException $error) {}
+            } catch (NoHandlerForMessageException $error) {}
+        }
     }
 }
