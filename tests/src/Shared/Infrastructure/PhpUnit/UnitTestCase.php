@@ -34,6 +34,14 @@ abstract class UnitTestCase extends MockeryTestCase
             ->andReturnNull();
     }
 
+    protected function shouldNotPublishDomainEvent(): void
+    {
+        $this->eventBus()
+            ->shouldReceive('publish')
+            ->withNoArgs()
+            ->andReturnNull();
+    }
+
     /** @return EventBus|MockInterface */
     protected function eventBus(): MockInterface
     {
