@@ -43,4 +43,9 @@ final class Course extends AggregateRoot
     {
         return $this->duration;
     }
+
+    public function rename(CourseName $newName): void
+    {
+        $this->name = $newName;
+    }
 }
