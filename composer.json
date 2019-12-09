@@ -19,7 +19,7 @@
     "symfony/twig-bundle": "^4.3",
     "symfony/validator": "^4.3",
 
-    "lambdish/phunctional": "^1.0",
+    "lambdish/phunctional": "^2.0",
 
     "ramsey/uuid": "^3.8",
 
