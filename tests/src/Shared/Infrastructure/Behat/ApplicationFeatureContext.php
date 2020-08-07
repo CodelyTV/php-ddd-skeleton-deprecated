@@ -6,7 +6,6 @@ namespace CodelyTv\Tests\Shared\Infrastructure\Behat;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use CodelyTv\Shared\Infrastructure\Bus\Event\DomainEventJsonDeserializer;
 use CodelyTv\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
 use CodelyTv\Shared\Infrastructure\Doctrine\DatabaseConnections;
