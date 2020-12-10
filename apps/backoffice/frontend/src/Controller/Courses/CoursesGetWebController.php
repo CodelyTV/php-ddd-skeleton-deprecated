@@ -28,4 +28,8 @@ final class CoursesGetWebController extends WebController
             ]
         );
     }
+    protected function exceptions(): array
+    {
+        // TODO: Implement exceptions() method.
+    }
 }
