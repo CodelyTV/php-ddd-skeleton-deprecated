@@ -20,4 +20,9 @@ final class HomeGetWebController extends WebController
             ]
         );
     }
+    
+    protected function exceptions(): array
+    {
+        // TODO: Implement exceptions() method.
+    }
 }
