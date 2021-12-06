@@ -1,0 +1,4 @@
+lovely-health-check_get:
+  path: /lovely-health-check
+  controller: CodelyTv\Apps\Mooc\Backend\Controller\LovelyHealthCheck\LovelyHealthCheckGetController
+  methods:  [GET]

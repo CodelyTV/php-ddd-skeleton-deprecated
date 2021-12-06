@@ -10,3 +10,4 @@ services:
     resource: '../../../../tests/src'
 
   CodelyTv\Shared\Domain\RandomNumberGenerator: '@CodelyTv\Tests\Shared\Infrastructure\ConstantRandomNumberGenerator'
+  CodelyTv\Shared\Domain\ClockInterface: '@CodelyTv\Tests\Shared\Infrastructure\Clock\StaticDatetimeClockGenerator'

@@ -17,6 +17,12 @@ mooc_backend:
         - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiRequestContext
         - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiResponseContext
 
+    lovely_health_check:
+      paths: [ tests/apps/mooc/backend/features/lovely_health_check ]
+      contexts:
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiRequestContext
+        - CodelyTv\Tests\Shared\Infrastructure\Behat\ApiResponseContext
+
     courses:
       paths: [ tests/apps/mooc/backend/features/courses ]
       contexts:
