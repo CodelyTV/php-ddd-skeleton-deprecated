@@ -3,7 +3,6 @@
 namespace CodelyTv\Apps\Mooc\Backend\Controller\LovelyHealthCheck;
 
 use CodelyTv\Shared\Domain\ClockInterface;
-use CodelyTv\Shared\Domain\RandomNumberGenerator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,12 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 class LovelyHealthCheckGetController
 {
     private const MESSAGE_OK = 'Todo va fino %s';
-    private $generator;
     private $clock;
 
-    public function __construct(RandomNumberGenerator $generator, ClockInterface $clock)
+    public function __construct(ClockInterface $clock)
     {
-        $this->generator = $generator;
         $this->clock = $clock;
     }
 
