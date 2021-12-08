@@ -6,5 +6,5 @@ use CodelyTv\Mooc\User\Domain\User;
 
 interface UserWriterRepositoryInterface
 {
-    public function save(string $name, string $email): User;
+    public function save(User $user): void;
 }

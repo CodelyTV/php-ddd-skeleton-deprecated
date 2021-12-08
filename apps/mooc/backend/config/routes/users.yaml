@@ -1,0 +1,4 @@
+record-user:
+  path: /users/{id}
+  controller: CodelyTv\Apps\Mooc\Backend\Controller\RecordUser\RecordUserController
+  methods: [PUT]
