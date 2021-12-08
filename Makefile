@@ -11,7 +11,7 @@ composer-install: CMD=install
 composer-update: CMD=update
 composer composer-install composer-update:
 	@docker run --rm --interactive --tty --volume $(current-dir):/app --user $(id -u):$(id -g) \
-		gsingh1/prestissimo $(CMD) \
+		composer:2 composer $(CMD) \
 			--ignore-platform-reqs \
 			--no-ansi \
 			--no-interaction
