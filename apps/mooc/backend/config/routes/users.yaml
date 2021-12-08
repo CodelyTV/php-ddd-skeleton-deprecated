@@ -1,4 +1,4 @@
 record-user:
   path: /users/{id}
-  controller: CodelyTv\Apps\Mooc\Backend\Controller\RecordUser\RecordUserController
+  controller: CodelyTv\Apps\Mooc\Backend\Controller\Users\CreateUsersPostController
   methods: [PUT]
