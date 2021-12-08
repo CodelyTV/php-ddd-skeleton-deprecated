@@ -37,7 +37,7 @@ final class CreateUserUseCaseTest extends TestCase
             )
         );
 
-        // Then any exception is thrown
+        // Then no exception is thrown
     }
 
     /**
