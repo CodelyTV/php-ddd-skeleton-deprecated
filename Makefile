@@ -11,10 +11,11 @@ composer-install: CMD=install
 composer-update: CMD=update
 composer composer-install composer-update:
 	@docker run --rm --interactive --volume $(current-dir):/app --user $(id -u):$(id -g) \
-		clevyr/prestissimo $(CMD) \
+		composer:2 "$(CMD)" \
 			--ignore-platform-reqs \
 			--no-ansi \
-			--no-interaction
+			--no-interaction \
+			--no-plugins
 
 reload:
 	@docker-compose exec php-fpm kill -USR2 1
