@@ -15,12 +15,13 @@ final class EloquentCourseRepository implements CourseRepository
 {
     public function save(Course $course): void
     {
-        $model           = new CourseEloquentModel();
-        $model->id       = $course->id()->value();
-        $model->name     = $course->name()->value();
-        $model->duration = $course->duration()->value();
+        $id = $course->id()->value();
 
-        $model->save();
+        CourseEloquentModel::updateOrCreate(compact('id'), [
+            'id' => $id,
+            'name' => $course->name()->value(),
+            'duration' => $course->duration()->value(),
+        ]);
     }
 
     public function search(CourseId $id): ?Course
