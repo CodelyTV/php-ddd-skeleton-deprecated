@@ -15,3 +15,6 @@ start-local:
 http-get-health-check:
 	curl http://172.17.0.2:8080/health-check
 
+http-get-greet:
+	curl http://172.17.0.2:8080/greet?name=manolo
+

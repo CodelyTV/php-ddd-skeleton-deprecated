@@ -1,0 +1,4 @@
+greet_get:
+  path: /greet
+  controller: CodelyTv\Apps\Mooc\Backend\Controller\Greet\GreetGetController
+  methods:  [GET]
