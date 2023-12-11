@@ -1,3 +1,6 @@
+> [!WARNING]  
+> This repository has been archived in favor of [PHP DDD Example](https://github.com/CodelyTV/php-ddd-example)
+
 <p align="center">
   <a href="https://codely.com">
     <img alt="Codely logo" src="https://user-images.githubusercontent.com/10558907/170513882-a09eee57-7765-4ca4-b2dd-3c2e061fdad0.png" width="300px" height="92px"/>
