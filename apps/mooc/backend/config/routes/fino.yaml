@@ -1,0 +1,4 @@
+fino_get:
+    path: /fino/{name}
+    controller: CodelyTv\Apps\Mooc\Backend\Controller\Fino\FinoGetController
+    methods:  [GET]
