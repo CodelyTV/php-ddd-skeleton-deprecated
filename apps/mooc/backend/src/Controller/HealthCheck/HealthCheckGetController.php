@@ -22,8 +22,10 @@ final class HealthCheckGetController
     {
         return new JsonResponse(
             [
-                'mooc-backend' => 'ok',
-                'rand'         => $this->generator->generate(),
+                "message" => "Todo va fino $name",
+                "datetime" =>  date('Y-m-d H:i'),
+                'status' => 'ok',
+                'number' => $this->generator->generate(),
             ]
         );
     }
